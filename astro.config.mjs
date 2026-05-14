@@ -4,8 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://masonjongejan.github.io',
-  base: '/happygreenworld',
+  site: 'https://www.happygreenworld.org',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
