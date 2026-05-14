@@ -1,0 +1,235 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import TeamCard from '../components/about/TeamCard.astro';
+import { getCollection } from 'astro:content';
+
+const teamMembers = (await getCollection('team')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<PageLayout
+  title="About Us"
+  description="Happy Green World Foundation was founded in 2013 by environmental consultant Marlou Jongejan-Bessem. Learn about our team, our mission, and the philosophy behind our work."
+>
+  <!-- Page hero -->
+  <section style="
+    background: linear-gradient(135deg, #2D6A4F 0%, #1e4d38 100%);
+    padding: 5rem 1.5rem;
+    color: #fff;
+  ">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+      <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
+        <a href="/" style="font-size: 0.875rem; color: rgba(255,255,255,0.65); text-decoration: none;">Home</a>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.4); margin: 0 0.5rem;">/</span>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.9);">About Us</span>
+      </nav>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff; margin: 0 0 1rem;">
+        Who we are
+      </h1>
+      <p style="font-size: 1.125rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0;">
+        A small, dedicated team with a shared belief — that the habits children develop early determine the kind of world they grow into.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission section -->
+  <section style="padding: 5rem 1.5rem; background: var(--color-bg);">
+    <div style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="mission-grid">
+      <div>
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--color-text); margin: 0 0 1.25rem;">
+          Our mission
+        </h2>
+        <p style="font-size: 1.0625rem; color: var(--color-text-muted); line-height: 1.75; margin: 0 0 1.25rem;">
+          Happy Green World Foundation develops environmental education programmes for children aged 6–16 around the world. Our curriculum focuses on three core themes — <strong style="color: var(--color-text);">waste, water, and energy</strong> — and is adapted for each community we work in.
+        </p>
+        <p style="font-size: 1.0625rem; color: var(--color-text-muted); line-height: 1.75; margin: 0;">
+          We create activity guides, student books, games, and coloring sheets with culturally relevant illustrations, then partner with local NGOs, schools, and organisations to deliver them to children who need them most.
+        </p>
+      </div>
+      <div style="position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 4/3;">
+        <img
+          src="/images/about-girl-waste-game.png"
+          alt="A child engaging with Happy Green World's waste sorting educational game"
+          style="width: 100%; height: 100%; object-fit: cover; display: block;"
+          loading="lazy"
+        />
+        <div style="
+          position: absolute;
+          bottom: 0; left: 0; right: 0;
+          padding: 1.5rem;
+          background: linear-gradient(to top, rgba(26,46,26,0.85) 0%, transparent 100%);
+        ">
+          <p style="
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-style: italic;
+            color: #fff;
+            line-height: 1.45;
+            margin: 0;
+          ">
+            "We do not inherit the earth from our ancestors — we borrow it from our children."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founding story section -->
+  <section style="padding: 4rem 1.5rem; background: var(--color-surface); border-top: 1px solid var(--color-border);">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--color-text); margin: 0 0 2rem;">
+        How it started
+      </h2>
+      <div style="position: relative; padding-left: 2rem; border-left: 3px solid var(--color-border);">
+        {[
+          {
+            year: '2009',
+            event: 'Marlou Jongejan-Bessem, then an environmental consultant, begins working in Cairo — and witnesses firsthand the devastating impact of poor waste management on communities and children.',
+          },
+          {
+            year: '2013',
+            event: 'Happy Green World Foundation (Stichting Happy Green World) is formally established in the Netherlands. Petra Houweling joins as co-founder and illustrator. Anja van Velzen joins as Treasurer. The first educational materials are created for Egypt.',
+          },
+          {
+            year: '2014–2019',
+            event: 'The partnership model expands to Indonesia, Senegal, Ghana, Ethiopia, and beyond. Materials are localised for each new country with culturally specific illustrations and examples.',
+          },
+          {
+            year: '2020',
+            event: 'Karin van Jeveren joins the team in Australia, strengthening communications and design. The foundation now operates in 8+ countries across Africa, Asia, Europe, and Oceania.',
+          },
+          {
+            year: 'Today',
+            event: 'Happy Green World works with local partners in 12+ countries, continuing to develop new programmes and deepen existing partnerships — always guided by the belief that lasting environmental change begins in the classroom.',
+          },
+        ].map(({ year, event }) => (
+          <div style="position: relative; margin-bottom: 2rem; padding-left: 1.5rem;">
+            <div style="
+              position: absolute;
+              left: -2.625rem;
+              top: 0.375rem;
+              width: 14px;
+              height: 14px;
+              border-radius: 50%;
+              background: var(--color-primary);
+              border: 3px solid var(--color-bg);
+            " aria-hidden="true"></div>
+            <div style="font-size: 0.8125rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.05em; margin-bottom: 0.375rem;">
+              {year}
+            </div>
+            <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">
+              {event}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo gallery strip -->
+  <section style="padding: 2rem 0; background: var(--color-bg); overflow: hidden;">
+    <div style="display: flex; gap: 0.75rem; padding: 0 1.5rem; overflow-x: auto; scrollbar-width: none;" class="photo-strip">
+      {[
+        { src: '/images/about-indonesia-reading.jpg', alt: 'Students reading Happy Green World materials in Indonesia' },
+        { src: '/images/about-cameroon.jpg', alt: 'Happy Green World programme activities in Cameroon' },
+        { src: '/images/country-thailand-programme.jpg', alt: 'Happy Green World programme in Thailand' },
+        { src: '/images/about-australia.jpg', alt: 'Happy Green World activities in Australia' },
+        { src: '/images/about-perth.jpg', alt: 'Happy Green World foundation team in Perth, Australia' },
+      ].map(({ src, alt }) => (
+        <div style="
+          flex-shrink: 0;
+          width: 280px;
+          height: 200px;
+          border-radius: 14px;
+          overflow: hidden;
+          background: var(--color-border);
+        ">
+          <img src={src} alt={alt} style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Team section -->
+  <section id="team" style="padding: 5rem 1.5rem; background: var(--color-bg);">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--color-text); margin: 0 0 0.75rem;">
+          Meet the team
+        </h2>
+        <p style="font-size: 1.0625rem; color: var(--color-text-muted); max-width: 520px; margin: 0 auto; line-height: 1.65;">
+          A small group of passionate people, working from the Netherlands and Australia to create educational materials used by children around the world.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" class="team-grid">
+        {teamMembers.map((member) => (
+          <TeamCard
+            name={member.data.name}
+            role={member.data.role}
+            photo={member.data.photo}
+            body={member.body ? member.body.split('\n\n')[0].trim() : ''}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA section -->
+  <section style="
+    padding: 4rem 1.5rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  ">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 1.875rem); color: var(--color-text); margin: 0 0 0.875rem;">
+        Want to work with us?
+      </h2>
+      <p style="font-size: 1.0625rem; color: var(--color-text-muted); line-height: 1.65; margin: 0 0 2rem;">
+        If you represent a school, NGO, foundation, or corporate programme and want to bring Happy Green World to your community, we'd love to hear from you.
+      </p>
+      <div style="display: flex; gap: 0.875rem; justify-content: center; flex-wrap: wrap;">
+        <a
+          href="/partner-with-us"
+          style="
+            display: inline-flex;
+            align-items: center;
+            padding: 0.875rem 1.75rem;
+            background: var(--color-primary);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+          "
+        >
+          Partner With Us
+        </a>
+        <a
+          href="/contact"
+          style="
+            display: inline-flex;
+            align-items: center;
+            padding: 0.875rem 1.75rem;
+            background: transparent;
+            color: var(--color-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+            border: 2px solid var(--color-primary);
+          "
+        >
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  @media (max-width: 768px) {
+    .mission-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+    .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+</style>

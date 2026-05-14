@@ -1,0 +1,32 @@
+---
+interface Props {
+  topic: 'waste' | 'water' | 'energy' | 'general';
+  size?: 'sm' | 'md';
+}
+
+const { topic, size = 'md' } = Astro.props;
+
+const colors = {
+  waste: { bg: 'rgba(82, 183, 136, 0.15)', text: '#2D6A4F', label: 'Waste' },
+  water: { bg: 'rgba(116, 192, 252, 0.2)', text: '#1864ab', label: 'Water' },
+  energy: { bg: 'rgba(255, 209, 102, 0.3)', text: '#8a6200', label: 'Energy' },
+  general: { bg: 'rgba(107, 123, 107, 0.12)', text: 'var(--color-text-muted)', label: 'General' },
+};
+
+const c = colors[topic];
+const padding = size === 'sm' ? '0.2rem 0.625rem' : '0.3rem 0.75rem';
+const fontSize = size === 'sm' ? '0.75rem' : '0.8125rem';
+---
+
+<span style={`
+  display: inline-block;
+  padding: ${padding};
+  background: ${c.bg};
+  color: ${c.text};
+  font-size: ${fontSize};
+  font-weight: 600;
+  border-radius: 99px;
+  letter-spacing: 0.02em;
+`}>
+  {c.label}
+</span>

@@ -1,0 +1,226 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Colour palette */
+  --color-primary: #2D6A4F;
+  --color-primary-dark: #1e4d38;
+  --color-secondary: #52B788;
+  --color-accent: #F4A261;
+  --color-accent-light: #FFD166;
+  --color-bg: #F9F7F2;
+  --color-surface: #FFFFFF;
+  --color-text: #1A2E1A;
+  --color-text-muted: #6B7B6B;
+  --color-border: #E0EAE0;
+
+  /* Typography */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+
+  /* Border radius */
+  --radius-card: 12px;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.75rem, 3.5vw, 2.25rem); }
+  h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-body { font-family: var(--font-body); }
+  .text-primary { color: var(--color-primary); }
+  .text-secondary { color: var(--color-secondary); }
+  .text-accent { color: var(--color-accent); }
+  .text-muted { color: var(--color-text-muted); }
+  .bg-primary { background-color: var(--color-primary); }
+  .bg-secondary { background-color: var(--color-secondary); }
+  .bg-accent { background-color: var(--color-accent); }
+  .bg-site { background-color: var(--color-bg); }
+  .bg-surface { background-color: var(--color-surface); }
+  .border-site { border-color: var(--color-border); }
+}
+
+/* ─── Keyframes ─────────────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg);   }
+  50%       { transform: translateY(-16px) rotate(4deg); }
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1);   opacity: 1;   }
+  50%       { transform: scale(1.6); opacity: 0.5; }
+}
+
+@keyframes pulseRing {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0;   }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1);    }
+  15%       { transform: scale(1.22); }
+  30%       { transform: scale(1);    }
+  45%       { transform: scale(1.16); }
+  60%       { transform: scale(1);    }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0);    }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes growWidth {
+  from { width: 0; opacity: 0; }
+  to   { width: 60px; opacity: 1; }
+}
+
+@keyframes orbitCircle {
+  from { transform: rotate(0deg) translateX(90px) rotate(0deg);     }
+  to   { transform: rotate(360deg) translateX(90px) rotate(-360deg); }
+}
+
+/* ─── Scroll-reveal system ──────────────────────────────────────── */
+
+[data-animate] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-animate="left"]  { transform: translateX(-28px); }
+[data-animate="right"] { transform: translateX(28px);  }
+[data-animate="scale"] { transform: scale(0.9); opacity: 0; }
+
+[data-animate].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+[data-delay="1"] { transition-delay: 0.08s; }
+[data-delay="2"] { transition-delay: 0.16s; }
+[data-delay="3"] { transition-delay: 0.24s; }
+[data-delay="4"] { transition-delay: 0.32s; }
+[data-delay="5"] { transition-delay: 0.40s; }
+[data-delay="6"] { transition-delay: 0.48s; }
+
+/* ─── Hero on-load animations ───────────────────────────────────── */
+
+.hero-badge  { animation: fadeInUp   0.55s cubic-bezier(0.22,1,0.36,1) 0.05s both; }
+.hero-h1     { animation: fadeInUp   0.65s cubic-bezier(0.22,1,0.36,1) 0.15s both; }
+.hero-body   { animation: fadeInUp   0.65s cubic-bezier(0.22,1,0.36,1) 0.25s both; }
+.hero-ctas   { animation: fadeInUp   0.65s cubic-bezier(0.22,1,0.36,1) 0.35s both; }
+.hero-image  { animation: fadeInRight 0.75s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
+
+/* ─── Hover lift ────────────────────────────────────────────────── */
+
+.hover-lift {
+  transition: transform 0.28s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.28s ease !important;
+  cursor: pointer;
+}
+
+.hover-lift:hover {
+  transform: translateY(-7px) !important;
+  box-shadow: 0 18px 44px rgba(45, 106, 79, 0.14) !important;
+}
+
+/* ─── Marquee strip ─────────────────────────────────────────────── */
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Continuous utility animations ─────────────────────────────── */
+
+.anim-float     { animation: float     4s ease-in-out infinite; }
+.anim-float-slow { animation: floatSlow 6s ease-in-out infinite; }
+.anim-heartbeat { animation: heartbeat 2.4s ease-in-out infinite; }
+.anim-spin-slow { animation: spinSlow  18s linear infinite; }
+.anim-pulse-dot { animation: pulseDot  2s ease-in-out infinite; }
+
+/* ─── Reduced-motion override ───────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] { opacity: 1; transform: none; transition: none; }
+  .hero-badge, .hero-h1, .hero-body, .hero-ctas, .hero-image { animation: none; }
+  .marquee-track { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,121 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Donate"
+  description="Support Happy Green World Foundation with a donation. Your contribution helps us localise environmental education materials for children in countries around the world."
+>
+  <section style="background: linear-gradient(135deg, #2D6A4F 0%, #1e4d38 100%); padding: 5rem 1.5rem; color: #fff;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+      <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
+        <a href="/" style="font-size: 0.875rem; color: rgba(255,255,255,0.65); text-decoration: none;">Home</a>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.4); margin: 0 0.5rem;">/</span>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.9);">Donate</span>
+      </nav>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff; margin: 0 0 1rem;">
+        Support Happy Green World
+      </h1>
+      <p style="font-size: 1.125rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0; max-width: 580px; margin-left: auto; margin-right: auto;">
+        Every donation brings environmental education to more children. Your support covers the cost of localising materials, printing activity guides, and delivering lessons to classrooms that need them.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding: 5rem 1.5rem; background: var(--color-bg);">
+    <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;" class="donate-grid">
+      <!-- What donations enable -->
+      <div>
+        <h2 style="font-family: var(--font-display); font-size: 1.5rem; color: var(--color-text); margin: 0 0 1.5rem;">
+          What your donation enables
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          {[
+            {
+              icon: '📚',
+              title: 'Localise a programme',
+              desc: 'Covers the cost of adapting and illustrating materials for a new country or language.',
+            },
+            {
+              icon: '🖨️',
+              title: 'Print materials for a school',
+              desc: 'Helps fund the printing of activity guides and workbooks for an entire classroom.',
+            },
+            {
+              icon: '🌍',
+              title: 'Reach a new community',
+              desc: 'Supports our team in establishing partnerships with organisations in new countries.',
+            },
+            {
+              icon: '✏️',
+              title: 'Develop new content',
+              desc: 'Funds the creation of new activity modules on emerging environmental challenges.',
+            },
+          ].map(({ icon, title, desc }) => (
+            <div style="display: flex; gap: 1rem; padding: 1.25rem; background: var(--color-surface); border-radius: 12px; border: 1px solid var(--color-border);">
+              <span style="font-size: 1.5rem; flex-shrink: 0;" aria-hidden="true">{icon}</span>
+              <div>
+                <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.25rem;">{title}</h3>
+                <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6; margin: 0;">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Bank details -->
+      <div>
+        <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 20px; padding: 2rem; position: sticky; top: 2rem;">
+          <h2 style="font-family: var(--font-display); font-size: 1.375rem; color: var(--color-text); margin: 0 0 1.5rem;">
+            Make a bank transfer
+          </h2>
+
+          <dl style="margin: 0; display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem;">
+            {[
+              { label: 'Account name', value: 'Stichting Happy Green World' },
+              { label: 'IBAN', value: 'NL63 TRIO 0197 6009 99' },
+              { label: 'SWIFT / BIC', value: 'TRIONL2U' },
+            ].map(({ label, value }) => (
+              <div style="padding-bottom: 1.25rem; border-bottom: 1px solid var(--color-border);">
+                <dt style="font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin-bottom: 0.35rem;">
+                  {label}
+                </dt>
+                <dd style="font-size: 1rem; font-weight: 600; color: var(--color-text); font-family: var(--font-display); margin: 0;">
+                  {value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">
+            Please include <strong style="color: var(--color-text);">"Donation"</strong> or your name in the payment reference. We are registered in the Netherlands as a non-profit foundation (<em>Stichting</em>).
+          </p>
+
+          <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(45, 106, 79, 0.07); border-radius: 10px;">
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">
+              For larger gifts, grants, or recurring donations, please <a href="mailto:info@happygreenworld.org" style="color: var(--color-primary); font-weight: 600;">contact us directly</a> — we'd love to talk about how your contribution can make the most impact.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tagline CTA -->
+  <section style="padding: 4rem 1.5rem; background: var(--color-surface); border-top: 1px solid var(--color-border); text-align: center;">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <blockquote style="margin: 0 0 1.5rem;">
+        <p style="font-family: var(--font-display); font-size: 1.25rem; font-style: italic; color: var(--color-text); line-height: 1.5; margin: 0;">
+          "If you want to go fast, go alone. If you want to go far, go together."
+        </p>
+      </blockquote>
+      <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">
+        Thank you for being part of the journey toward a Happy Green World.
+      </p>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  @media (max-width: 768px) { .donate-grid { grid-template-columns: 1fr !important; } }
+</style>

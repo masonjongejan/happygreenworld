@@ -1,0 +1,157 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const programmes = (await getCollection('programmes')).sort((a, b) => a.data.order - b.data.order);
+
+const colorMap: Record<string, { text: string; bg: string }> = {
+  '#52B788': { text: '#2D6A4F', bg: 'rgba(82, 183, 136, 0.12)' },
+  '#74C0FC': { text: '#1864ab', bg: 'rgba(116, 192, 252, 0.15)' },
+  '#FFD166': { text: '#8a6200', bg: 'rgba(255, 209, 102, 0.2)' },
+};
+---
+
+<PageLayout
+  title="Our Programmes"
+  description="Happy Green World offers three core environmental education programmes for children aged 6–16: Waste & Recycling, Water & Conservation, and Energy & Climate — each localised for the communities where they are taught."
+>
+  <!-- Hero -->
+  <section style="background: linear-gradient(135deg, #2D6A4F 0%, #1e4d38 100%); padding: 5rem 1.5rem; color: #fff;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+      <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
+        <a href="/" style="font-size: 0.875rem; color: rgba(255,255,255,0.65); text-decoration: none;">Home</a>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.4); margin: 0 0.5rem;">/</span>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.9);">Programmes</span>
+      </nav>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff; margin: 0 0 1rem;">
+        Our Programmes
+      </h1>
+      <p style="font-size: 1.125rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Three core curriculum areas, each designed to be meaningful in the local context where it is taught — with illustrations, activities, and examples drawn from children's own environments.
+      </p>
+    </div>
+  </section>
+
+  <!-- Programmes grid -->
+  <section style="padding: 5rem 1.5rem; background: var(--color-bg);">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <div style="display: grid; gap: 2rem;">
+        {programmes.map((programme) => {
+          const colors = colorMap[programme.data.color] || { text: 'var(--color-primary)', bg: 'rgba(45, 106, 79, 0.1)' };
+          return (
+            <article style="
+              background: var(--color-surface);
+              border: 1px solid var(--color-border);
+              border-radius: 16px;
+              padding: 2.5rem;
+              display: grid;
+              grid-template-columns: auto 1fr auto;
+              gap: 2rem;
+              align-items: center;
+            " class="programme-row">
+              <div style={`
+                width: 72px;
+                height: 72px;
+                border-radius: 16px;
+                background: ${colors.bg};
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+              `}>
+                <div style={`
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  background: ${programme.data.color};
+                  opacity: 0.7;
+                `} aria-hidden="true"></div>
+              </div>
+
+              <div>
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.625rem;">
+                  <h2 style="font-family: var(--font-display); font-size: 1.375rem; font-weight: 600; color: var(--color-text); margin: 0;">
+                    {programme.data.title}
+                  </h2>
+                  <span style={`
+                    display: inline-block;
+                    padding: 0.25rem 0.625rem;
+                    background: ${colors.bg};
+                    color: ${colors.text};
+                    font-size: 0.8125rem;
+                    font-weight: 600;
+                    border-radius: 99px;
+                  `}>
+                    {programme.data.ageRange}
+                  </span>
+                </div>
+                <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">
+                  {programme.data.tagline}
+                </p>
+              </div>
+
+              <a
+                href={`/programmes/${programme.data.slug}`}
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 0.375rem;
+                  padding: 0.75rem 1.375rem;
+                  background: var(--color-primary);
+                  color: #fff;
+                  font-size: 0.9375rem;
+                  font-weight: 600;
+                  text-decoration: none;
+                  border-radius: 10px;
+                  white-space: nowrap;
+                  flex-shrink: 0;
+                "
+              >
+                Learn more
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 4rem 1.5rem; background: var(--color-surface); border-top: 1px solid var(--color-border); text-align: center;">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 1.875rem); color: var(--color-text); margin: 0 0 0.875rem;">
+        Want to deliver these programmes in your community?
+      </h2>
+      <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0 0 2rem;">
+        We work with schools, NGOs, and organisations worldwide to localise and distribute our materials. Start a conversation with us.
+      </p>
+      <a
+        href="/partner-with-us"
+        style="
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.875rem 1.75rem;
+          background: var(--color-accent);
+          color: var(--color-text);
+          font-size: 1rem;
+          font-weight: 700;
+          text-decoration: none;
+          border-radius: 10px;
+        "
+      >
+        Partner With Us →
+      </a>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  @media (max-width: 700px) {
+    .programme-row {
+      grid-template-columns: 1fr !important;
+      gap: 1.25rem !important;
+    }
+  }
+</style>
+

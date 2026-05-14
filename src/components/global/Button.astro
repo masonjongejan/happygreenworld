@@ -1,0 +1,62 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'ghost' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  external?: boolean;
+  class?: string;
+  type?: 'button' | 'submit' | 'reset';
+  [key: string]: unknown;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  external = false,
+  class: className = '',
+  type = 'button',
+  ...rest
+} = Astro.props;
+
+const baseStyle = `
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  white-space: nowrap;
+`;
+
+const sizeStyles = {
+  sm: 'padding: 0.5rem 1rem; font-size: 0.875rem;',
+  md: 'padding: 0.75rem 1.5rem; font-size: 1rem;',
+  lg: 'padding: 1rem 2rem; font-size: 1.0625rem;',
+};
+
+const variantStyles = {
+  primary: 'background: var(--color-primary); color: #fff;',
+  secondary: 'background: var(--color-accent); color: var(--color-text);',
+  ghost: 'background: rgba(45, 106, 79, 0.1); color: var(--color-primary);',
+  outline: 'background: transparent; color: var(--color-primary); border-color: var(--color-primary);',
+};
+
+const style = `${baseStyle} ${sizeStyles[size as keyof typeof sizeStyles]} ${variantStyles[variant as keyof typeof variantStyles]}`;
+const externalAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+{href ? (
+  <a href={href} style={style} class={className} {...externalAttrs} {...rest}>
+    <slot />
+  </a>
+) : (
+  <button type={type} style={style} class={className} {...rest}>
+    <slot />
+  </button>
+)}

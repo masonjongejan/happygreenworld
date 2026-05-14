@@ -1,0 +1,303 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const downloads = (await getCollection('downloads')).sort((a, b) => a.data.order - b.data.order);
+const activityModules = downloads.filter(d => d.data.type === 'activity');
+const coloringSheets = downloads.filter(d => d.data.type === 'coloring');
+
+const topicColors: Record<string, { text: string; bg: string }> = {
+  waste: { text: '#2D6A4F', bg: 'rgba(82, 183, 136, 0.15)' },
+  water: { text: '#1864ab', bg: 'rgba(116, 192, 252, 0.2)' },
+  energy: { text: '#8a6200', bg: 'rgba(255, 209, 102, 0.3)' },
+  general: { text: 'var(--color-text-muted)', bg: 'rgba(107, 123, 107, 0.12)' },
+};
+
+const videos = [
+  {
+    title: 'Towards a Happy Green World',
+    description: 'An introduction to the Happy Green World Foundation — our mission, our work, and the children we serve.',
+    embedUrl: 'https://www.youtube.com/embed/placeholder1',
+  },
+  {
+    title: 'The Clean and Green Senegal Lesson',
+    description: 'See our environmental education programme in action in Senegal, delivered by our local partner Casades.',
+    embedUrl: 'https://www.youtube.com/embed/placeholder2',
+  },
+  {
+    title: 'Green Indonesia Recycling Education Programme',
+    description: 'The Indonesian Waste Platform delivers Happy Green World\'s recycling curriculum to children across Indonesia.',
+    embedUrl: 'https://www.youtube.com/embed/placeholder3',
+  },
+];
+---
+
+<PageLayout
+  title="Resources"
+  description="Download free educational materials from Happy Green World — activity guides, student workbooks, and coloring sheets on waste, water, and energy for children aged 6–16."
+>
+  <!-- Hero -->
+  <section style="background: linear-gradient(135deg, #2D6A4F 0%, #1e4d38 100%); padding: 5rem 1.5rem; color: #fff;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+      <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
+        <a href="/" style="font-size: 0.875rem; color: rgba(255,255,255,0.65); text-decoration: none;">Home</a>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.4); margin: 0 0.5rem;">/</span>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.9);">Resources</span>
+      </nav>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff; margin: 0 0 1rem;">
+        Educational Resources
+      </h1>
+      <p style="font-size: 1.125rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Download our free activity guides, coloring sheets, and student materials — or watch our programme in action.
+      </p>
+
+      <div style="display: flex; gap: 0.875rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+        <a href="#downloads" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(255,255,255,0.15); color: #fff; font-size: 0.9375rem; font-weight: 600; text-decoration: none; border-radius: 10px; border: 1px solid rgba(255,255,255,0.25);">
+          Downloads
+        </a>
+        <a href="#videos" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(255,255,255,0.15); color: #fff; font-size: 0.9375rem; font-weight: 600; text-decoration: none; border-radius: 10px; border: 1px solid rgba(255,255,255,0.25);">
+          Videos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Downloads section -->
+  <section id="downloads" style="padding: 5rem 1.5rem; background: var(--color-bg);">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div style="margin-bottom: 3rem;">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--color-text); margin: 0 0 0.75rem;">
+          Activity Modules
+        </h2>
+        <p style="font-size: 1rem; color: var(--color-text-muted); margin: 0 0 2rem; line-height: 1.65;">
+          Each module is a self-contained 45–60 minute classroom activity, designed to be run by a teacher or facilitator with minimal preparation.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;" class="downloads-grid">
+          {activityModules.map((item) => {
+            const colors = topicColors[item.data.topic] || topicColors.general;
+            return (
+              <article style="
+                background: var(--color-surface);
+                border: 1px solid var(--color-border);
+                border-radius: 14px;
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+              ">
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 1rem;">
+                  <span style={`
+                    display: inline-block;
+                    padding: 0.25rem 0.625rem;
+                    background: ${colors.bg};
+                    color: ${colors.text};
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    border-radius: 99px;
+                    flex-shrink: 0;
+                  `}>
+                    {item.data.topic.charAt(0).toUpperCase() + item.data.topic.slice(1)}
+                  </span>
+                  {item.data.duration && (
+                    <span style="font-size: 0.75rem; color: var(--color-text-muted); flex-shrink: 0;">
+                      {item.data.duration}
+                    </span>
+                  )}
+                </div>
+
+                <h3 style="font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.5rem; flex: 1;">
+                  {item.data.title}
+                </h3>
+
+                {item.data.ageRange && (
+                  <p style="font-size: 0.8125rem; color: var(--color-text-muted); margin: 0 0 1rem;">
+                    {item.data.ageRange}
+                  </p>
+                )}
+
+                <a
+                  href={`/downloads/${item.data.filename}`}
+                  download
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5rem;
+                    padding: 0.625rem 1rem;
+                    background: rgba(45, 106, 79, 0.08);
+                    color: var(--color-primary);
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    text-decoration: none;
+                    border-radius: 8px;
+                    border: 1px solid rgba(45, 106, 79, 0.2);
+                    margin-top: auto;
+                  "
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Download PDF
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Coloring sheets -->
+      <div>
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.625rem); color: var(--color-text); margin: 0 0 0.75rem;">
+          Coloring Sheets
+        </h2>
+        <p style="font-size: 1rem; color: var(--color-text-muted); margin: 0 0 2rem; line-height: 1.65;">
+          Free printable coloring sheets for younger children.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; max-width: 640px;" class="coloring-grid">
+          {coloringSheets.map((item) => (
+            <article style="
+              background: var(--color-surface);
+              border: 1px solid var(--color-border);
+              border-radius: 14px;
+              padding: 1.5rem;
+              display: flex;
+              flex-direction: column;
+            ">
+              <div style="
+                width: 100%;
+                aspect-ratio: 4/3;
+                border-radius: 8px;
+                background: rgba(45, 106, 79, 0.06);
+                margin-bottom: 1rem;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+                <img
+                  src={item.data.filename === 'coloringsheetanimals.pdf' ? '/images/download-coloring-sheet-animals.png' : '/images/download-colorsheet-hgw.png'}
+                  alt={item.data.title}
+                  style="width: 100%; height: 100%; object-fit: cover;"
+                  loading="lazy"
+                />
+              </div>
+              <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--color-text); margin: 0 0 1rem; flex: 1;">
+                {item.data.title}
+              </h3>
+              <a
+                href={`/downloads/${item.data.filename}`}
+                download
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 0.5rem;
+                  padding: 0.625rem 1rem;
+                  background: rgba(45, 106, 79, 0.08);
+                  color: var(--color-primary);
+                  font-size: 0.875rem;
+                  font-weight: 600;
+                  text-decoration: none;
+                  border-radius: 8px;
+                  border: 1px solid rgba(45, 106, 79, 0.2);
+                "
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download PDF
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Videos section -->
+  <section id="videos" style="padding: 5rem 1.5rem; background: var(--color-surface); border-top: 1px solid var(--color-border);">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--color-text); margin: 0 0 0.75rem;">
+        Videos
+      </h2>
+      <p style="font-size: 1rem; color: var(--color-text-muted); margin: 0 0 2.5rem; line-height: 1.65;">
+        Watch Happy Green World's programmes in action — from our foundation story to classroom lessons delivered by our partners around the world.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" class="videos-grid">
+        {videos.map(({ title, description, embedUrl }) => (
+          <article style="
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            overflow: hidden;
+          ">
+            <div style="position: relative; aspect-ratio: 16/9; background: #1A2E1A;">
+              <iframe
+                src={embedUrl}
+                title={title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                style="position: absolute; inset: 0; width: 100%; height: 100%; border: none;"
+              />
+            </div>
+            <div style="padding: 1.25rem;">
+              <h3 style="font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.5rem;">
+                {title}
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6; margin: 0;">
+                {description}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner CTA -->
+  <section style="padding: 4rem 1.5rem; background: var(--color-bg); border-top: 1px solid var(--color-border); text-align: center;">
+    <div style="max-width: 560px; margin: 0 auto;">
+      <h2 style="font-family: var(--font-display); font-size: clamp(1.375rem, 2.5vw, 1.75rem); color: var(--color-text); margin: 0 0 0.75rem;">
+        Want to use these materials in your school or community?
+      </h2>
+      <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0 0 2rem;">
+        We localise and adapt our materials for each partner. Get in touch to find out how we can work together.
+      </p>
+      <a
+        href="/partner-with-us"
+        style="
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.875rem 1.75rem;
+          background: var(--color-accent);
+          color: var(--color-text);
+          font-size: 1rem;
+          font-weight: 700;
+          text-decoration: none;
+          border-radius: 10px;
+        "
+      >
+        Partner With Us →
+      </a>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  @media (max-width: 900px) {
+    .downloads-grid { grid-template-columns: 1fr 1fr !important; }
+    .videos-grid { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 600px) {
+    .downloads-grid { grid-template-columns: 1fr !important; }
+    .coloring-grid { grid-template-columns: 1fr !important; }
+  }
+</style>

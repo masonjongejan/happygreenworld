@@ -1,0 +1,80 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Thank You"
+  description="Thank you for reaching out to Happy Green World. We'll be in touch as soon as possible."
+>
+  <section style="
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 1.5rem;
+    background: var(--color-bg);
+  ">
+    <div style="max-width: 560px; text-align: center;">
+      <div style="
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(82, 183, 136, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+      ">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <polyline points="20,6 9,17 4,12"/>
+        </svg>
+      </div>
+
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; color: var(--color-text); margin: 0 0 1rem;">
+        Message received — thank you!
+      </h1>
+      <p style="font-size: 1.0625rem; color: var(--color-text-muted); line-height: 1.7; margin: 0 0 0.75rem;">
+        We've received your message and will be in touch <strong style="color: var(--color-text);">as soon as possible</strong>.
+      </p>
+      <p style="font-size: 1.0625rem; color: var(--color-text-muted); line-height: 1.7; margin: 0 0 3rem;">
+        In the meantime, feel free to explore our programmes and materials below.
+      </p>
+
+      <div style="display: flex; gap: 0.875rem; justify-content: center; flex-wrap: wrap;">
+        <a
+          href="/programmes"
+          style="
+            display: inline-flex;
+            align-items: center;
+            padding: 0.875rem 1.5rem;
+            background: var(--color-primary);
+            color: #fff;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+          "
+        >
+          Explore Programmes
+        </a>
+        <a
+          href="/resources"
+          style="
+            display: inline-flex;
+            align-items: center;
+            padding: 0.875rem 1.5rem;
+            background: var(--color-surface);
+            color: var(--color-primary);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+            border: 2px solid var(--color-primary);
+          "
+        >
+          View Resources
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

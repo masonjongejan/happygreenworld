@@ -1,0 +1,476 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const hgwData = [
+  { num: '818', name: 'Egypt',              region: 'Africa',          partner: 'El Kalema',                            image: null },
+  { num: '834', name: 'Tanzania',           region: 'Africa',          partner: '',                                     image: '/images/country-tanzania-children.jpg' },
+  { num: '120', name: 'Cameroon',           region: 'Africa',          partner: 'Main de Rêve & Bénévoles Océan',       image: '/images/about-cameroon.jpg' },
+  { num: '288', name: 'Ghana',              region: 'Africa',          partner: 'FARIAD',                               image: null },
+  { num: '180', name: 'DR Congo',           region: 'Africa',          partner: 'REC ASBL',                             image: null },
+  { num: '686', name: 'Senegal',            region: 'Africa',          partner: 'Casades',                              image: null },
+  { num: '231', name: 'Ethiopia',           region: 'Africa',          partner: 'DMA / El Gasha',                       image: null },
+  { num: '072', name: 'Botswana',           region: 'Africa',          partner: '',                                     image: null },
+  { num: '108', name: 'Burundi',            region: 'Africa',          partner: '',                                     image: null },
+  { num: '768', name: 'Togo',              region: 'Africa',           partner: '',                                     image: null },
+  { num: '854', name: 'Burkina Faso',       region: 'Africa',          partner: '',                                     image: null },
+  { num: '178', name: 'Republic of Congo',  region: 'Africa',          partner: '',                                     image: null },
+  { num: '324', name: 'Guinea',             region: 'Africa',          partner: '',                                     image: null },
+  { num: '204', name: 'Benin',              region: 'Africa',          partner: '',                                     image: null },
+  { num: '562', name: 'Niger',              region: 'Africa',          partner: '',                                     image: null },
+  { num: '694', name: 'Sierra Leone',       region: 'Africa',          partner: 'COMIN-SL',                             image: null },
+  { num: '360', name: 'Indonesia',          region: 'Asia & Oceania',  partner: 'Indonesian Waste Platform',            image: '/images/about-indonesia-reading.jpg' },
+  { num: '764', name: 'Thailand',           region: 'Asia & Oceania',  partner: 'British International School of Phuket', image: '/images/country-thailand-programme.jpg' },
+  { num: '036', name: 'Australia',          region: 'Asia & Oceania',  partner: '',                                     image: '/images/about-australia.jpg' },
+  { num: '528', name: 'Netherlands',        region: 'Europe',          partner: '',                                     image: null },
+  { num: '604', name: 'Peru',              region: 'South America',    partner: '',                                     image: null },
+];
+
+const regions = ['Africa', 'Asia & Oceania', 'Europe', 'South America'];
+---
+
+<PageLayout
+  title="Our Projects"
+  description="Happy Green World has delivered environmental education programmes in 21 countries across Africa, Asia, Oceania, Europe, and South America."
+>
+  <!-- Hero -->
+  <section style="
+    background: linear-gradient(135deg, #2D6A4F 0%, #1e4d38 100%);
+    padding: 5rem 1.5rem;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  ">
+    <div style="position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.06); animation: spinSlow 30s linear infinite;" aria-hidden="true"></div>
+    <div style="position: absolute; bottom: -40px; left: -40px; width: 160px; height: 160px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.05); animation: spinSlow 22s linear infinite reverse;" aria-hidden="true"></div>
+
+    <div style="max-width: 800px; margin: 0 auto; text-align: center; position: relative;">
+      <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
+        <a href="/" style="font-size: 0.875rem; color: rgba(255,255,255,0.65); text-decoration: none;">Home</a>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.4); margin: 0 0.5rem;">/</span>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.9);">Our Projects</span>
+      </nav>
+      <h1 class="hero-h1" style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff; margin: 0 0 1rem;">
+        Our Projects Around the World
+      </h1>
+      <p class="hero-body" style="font-size: 1.125rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0 0 1.5rem;">
+        From West Africa to Southeast Asia, Happy Green World has partnered with local organisations to bring environmental education to children in 21 countries — and counting.
+      </p>
+      <div class="hero-ctas" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 1rem; background: rgba(255,255,255,0.12); border-radius: 99px; font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.9);">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent-light); display: inline-block; animation: pulseDot 2s ease-in-out infinite;"></span>
+          21 Countries
+        </div>
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 1rem; background: rgba(255,255,255,0.12); border-radius: 99px; font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.9);">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-secondary); display: inline-block; animation: pulseDot 2s ease-in-out infinite 0.3s;"></span>
+          4 Continents
+        </div>
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 1rem; background: rgba(255,255,255,0.12); border-radius: 99px; font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.9);">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block; animation: pulseDot 2s ease-in-out infinite 0.6s;"></span>
+          Since 2013
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Globe section -->
+  <section style="
+    background: #0d1b2a;
+    position: relative;
+    overflow: hidden;
+    min-height: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  ">
+    <!-- Hint text -->
+    <p id="globe-hint" style="
+      position: absolute;
+      top: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.45);
+      font-size: 0.8125rem;
+      letter-spacing: 0.04em;
+      margin: 0;
+      text-align: center;
+      pointer-events: none;
+      transition: opacity 0.5s;
+      white-space: nowrap;
+      z-index: 10;
+    ">
+      Drag to rotate &nbsp;·&nbsp; Hover a highlighted country to explore
+    </p>
+
+    <!-- Globe mount — full width so Three.js centres the sphere correctly -->
+    <div id="globe-el" style="width: 100%; height: 720px;"></div>
+
+    <!-- Country info card (top-right) -->
+    <div id="country-card" style="
+      position: absolute;
+      top: 4.5rem;
+      right: 1.5rem;
+      width: 268px;
+      background: rgba(249, 247, 242, 0.97);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+      opacity: 0;
+      transform: translateY(10px) scale(0.96);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      pointer-events: none;
+      z-index: 30;
+    ">
+      <!-- Image area -->
+      <div id="card-img-wrap" style="
+        height: 150px;
+        background: linear-gradient(135deg, rgba(82,183,136,0.18) 0%, rgba(45,106,79,0.12) 100%);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      ">
+        <img
+          id="card-img"
+          src=""
+          alt=""
+          style="width: 100%; height: 100%; object-fit: cover; display: none; transition: transform 0.4s ease;"
+        />
+        <!-- Globe icon fallback -->
+        <svg id="card-fallback" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(45,106,79,0.35)" stroke-width="1.25" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        <!-- Green accent bar at bottom of image -->
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #2D6A4F, #52B788);"></div>
+      </div>
+
+      <!-- Text -->
+      <div style="padding: 1.125rem 1.25rem 1.375rem;">
+        <div id="card-country" style="
+          font-family: var(--font-display);
+          font-size: 1.2rem;
+          font-weight: 700;
+          color: #1A2E1A;
+          margin: 0 0 0.2rem;
+          line-height: 1.2;
+        "></div>
+        <div id="card-region" style="
+          font-size: 0.7rem;
+          font-weight: 700;
+          color: #2D6A4F;
+          text-transform: uppercase;
+          letter-spacing: 0.07em;
+          margin-bottom: 0.75rem;
+        "></div>
+        <div id="card-partner" style="
+          font-size: 0.875rem;
+          color: #6B7B6B;
+          line-height: 1.5;
+        "></div>
+      </div>
+    </div>
+
+    <!-- Loading spinner -->
+    <div id="globe-loading" style="
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 10;
+    ">
+      <div style="
+        width: 44px; height: 44px;
+        border: 3px solid rgba(255,255,255,0.15);
+        border-top-color: #52B788;
+        border-radius: 50%;
+        animation: spinSlow 0.9s linear infinite;
+        margin-bottom: 1rem;
+      "></div>
+      <p style="color: rgba(255,255,255,0.5); font-size: 0.875rem; margin: 0;">Loading globe…</p>
+    </div>
+
+    <!-- Mobile fallback message -->
+    <p id="globe-mobile-note" style="
+      display: none;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8125rem;
+      text-align: center;
+      margin: 1rem 0 0;
+    ">Touch and drag to rotate</p>
+  </section>
+
+  <!-- Country list by region -->
+  <section style="padding: 5rem 1.5rem; background: var(--color-bg);">
+    <div style="max-width: 960px; margin: 0 auto;">
+      <div data-animate style="text-align: center; margin-bottom: 3.5rem;">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--color-text); margin: 0 0 0.75rem;">
+          Countries We've Worked In
+        </h2>
+        <p style="font-size: 1.0625rem; color: var(--color-text-muted); max-width: 560px; margin: 0 auto; line-height: 1.65;">
+          We work through local partner organisations — NGOs, schools, and community groups — who know their communities best.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem 5rem;" class="regions-grid">
+        {regions.map((region, ri) => {
+          const countries = hgwData.filter(c => c.region === region);
+          return (
+            <div data-animate data-delay={String(ri + 1)}>
+              <h3 style="
+                font-family: var(--font-display);
+                font-size: 1.125rem;
+                color: var(--color-text);
+                margin: 0 0 1rem;
+                padding-bottom: 0.625rem;
+                border-bottom: 2px solid var(--color-border);
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+              ">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-primary); flex-shrink: 0; display: inline-block;"></span>
+                {region}
+              </h3>
+              <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                {countries.map(({ name, partner }) => (
+                  <li style="display: flex; align-items: flex-start; gap: 0.625rem;">
+                    <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-secondary); flex-shrink: 0; margin-top: 0.45rem;"></span>
+                    <span>
+                      <span style="font-size: 0.9375rem; font-weight: 600; color: var(--color-text);">{name}</span>
+                      {partner && <span style="font-size: 0.8125rem; color: var(--color-text-muted);"> — {partner}</span>}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 4.5rem 1.5rem; background: var(--color-surface); border-top: 1px solid var(--color-border); text-align: center;">
+    <div data-animate="scale" style="max-width: 600px; margin: 0 auto;">
+      <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 1.875rem); color: var(--color-text); margin: 0 0 0.875rem;">
+        Want to add your country to this map?
+      </h2>
+      <p style="font-size: 1.0625rem; color: var(--color-text-muted); line-height: 1.65; margin: 0 0 2rem;">
+        We are always looking for new local partners to bring environmental education to more children around the world.
+      </p>
+      <a
+        href="/partner-with-us"
+        style="
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.875rem 1.75rem;
+          background: var(--color-primary);
+          color: #fff;
+          font-size: 1rem;
+          font-weight: 600;
+          text-decoration: none;
+          border-radius: 10px;
+          transition: background 0.2s, transform 0.2s;
+        "
+        onmouseover="this.style.background='#1e4d38'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.background='var(--color-primary)'; this.style.transform=''"
+      >
+        Partner With Us
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12,5 19,12 12,19"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  @media (max-width: 640px) {
+    .regions-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+<script is:inline>
+// ─── Country data (ISO numeric → info) ───────────────────────────
+const HGW = {
+  '818': { name: 'Egypt',             region: 'Africa',         partner: 'El Kalema',                              image: null },
+  '834': { name: 'Tanzania',          region: 'Africa',         partner: '',                                       image: '/images/country-tanzania-children.jpg' },
+  '120': { name: 'Cameroon',          region: 'Africa',         partner: 'Main de Rêve & Bénévoles Océan',         image: '/images/about-cameroon.jpg' },
+  '288': { name: 'Ghana',             region: 'Africa',         partner: 'FARIAD',                                 image: null },
+  '180': { name: 'DR Congo',          region: 'Africa',         partner: 'REC ASBL',                               image: null },
+  '686': { name: 'Senegal',           region: 'Africa',         partner: 'Casades',                                image: null },
+  '231': { name: 'Ethiopia',          region: 'Africa',         partner: 'DMA / El Gasha',                         image: null },
+  '072': { name: 'Botswana',          region: 'Africa',         partner: '',                                       image: null },
+  '108': { name: 'Burundi',           region: 'Africa',         partner: '',                                       image: null },
+  '768': { name: 'Togo',             region: 'Africa',          partner: '',                                       image: null },
+  '854': { name: 'Burkina Faso',      region: 'Africa',         partner: '',                                       image: null },
+  '178': { name: 'Republic of Congo', region: 'Africa',         partner: '',                                       image: null },
+  '324': { name: 'Guinea',            region: 'Africa',         partner: '',                                       image: null },
+  '204': { name: 'Benin',             region: 'Africa',         partner: '',                                       image: null },
+  '562': { name: 'Niger',             region: 'Africa',         partner: '',                                       image: null },
+  '694': { name: 'Sierra Leone',      region: 'Africa',         partner: 'COMIN-SL',                               image: null },
+  '360': { name: 'Indonesia',         region: 'Asia & Oceania', partner: 'Indonesian Waste Platform',              image: '/images/about-indonesia-reading.jpg' },
+  '764': { name: 'Thailand',          region: 'Asia & Oceania', partner: 'British International School of Phuket', image: '/images/country-thailand-programme.jpg' },
+  '036': { name: 'Australia',         region: 'Asia & Oceania', partner: '',                                       image: '/images/about-australia.jpg' },
+  '528': { name: 'Netherlands',       region: 'Europe',         partner: '',                                       image: null },
+  '604': { name: 'Peru',             region: 'South America',   partner: '',                                       image: null },
+};
+
+// ─── Colours ─────────────────────────────────────────────────────
+const GREEN      = 'rgba(45, 106, 79, 0.78)';
+const GREEN_SIDE = 'rgba(45, 106, 79, 0.3)';
+const AMBER      = 'rgba(244, 162, 97, 0.92)';
+const NONE       = 'rgba(255,255,255,0)';
+
+let hoveredNum  = null;
+let globeInstance = null;
+let autoRotating  = true;
+
+// ─── Card helpers ─────────────────────────────────────────────────
+function showCard(feat) {
+  const num  = String(feat?.id ?? '');
+  const data = HGW[num];
+  if (!data) { hideCard(); return; }
+
+  const card    = document.getElementById('country-card');
+  const imgEl   = document.getElementById('card-img');
+  const fallEl  = document.getElementById('card-fallback');
+  const nameEl  = document.getElementById('card-country');
+  const regEl   = document.getElementById('card-region');
+  const partEl  = document.getElementById('card-partner');
+
+  nameEl.textContent = data.name;
+  regEl.textContent  = data.region;
+  partEl.textContent = data.partner ? `Partner: ${data.partner}` : 'Happy Green World programme';
+
+  if (data.image) {
+    imgEl.src = data.image;
+    imgEl.alt = `Happy Green World in ${data.name}`;
+    imgEl.style.display = 'block';
+    if (fallEl) fallEl.style.display = 'none';
+  } else {
+    imgEl.style.display = 'none';
+    if (fallEl) fallEl.style.display = 'flex';
+  }
+
+  card.style.opacity   = '1';
+  card.style.transform = 'translateY(0) scale(1)';
+}
+
+function hideCard() {
+  const card = document.getElementById('country-card');
+  card.style.opacity   = '0';
+  card.style.transform = 'translateY(10px) scale(0.96)';
+}
+
+// ─── Polygon colour/altitude fns ─────────────────────────────────
+function capColor(feat) {
+  const num = String(feat.id);
+  if (!HGW[num]) return NONE;
+  return num === hoveredNum ? AMBER : GREEN;
+}
+
+function sideColor(feat) {
+  return HGW[String(feat.id)] ? GREEN_SIDE : NONE;
+}
+
+function altFn(feat) {
+  const num = String(feat.id);
+  if (!HGW[num]) return 0;
+  return num === hoveredNum ? 0.016 : 0.006;
+}
+
+// ─── Main init ───────────────────────────────────────────────────
+async function initGlobe() {
+  const el        = document.getElementById('globe-el');
+  const loadingEl = document.getElementById('globe-loading');
+  const hintEl    = document.getElementById('globe-hint');
+  if (!el) return;
+
+  // Load globe.gl UMD bundle
+  await new Promise((res, rej) => {
+    const s  = document.createElement('script');
+    s.src    = 'https://unpkg.com/globe.gl@2/dist/globe.gl.min.js';
+    s.onload = res;
+    s.onerror = rej;
+    document.head.appendChild(s);
+  });
+
+  // Load world topology (topojson, ~90 KB)
+  await new Promise((res, rej) => {
+    const s  = document.createElement('script');
+    s.src    = 'https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js';
+    s.onload = res;
+    s.onerror = rej;
+    document.head.appendChild(s);
+  });
+
+  const world    = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r => r.json());
+  const features = topojson.feature(world, world.objects.countries).features;
+
+  // Hide loader
+  if (loadingEl) loadingEl.style.display = 'none';
+  if (hintEl)    hintEl.style.opacity    = '1';
+
+  // ── Build globe ──
+  globeInstance = Globe({ rendererConfig: { alpha: true, antialias: true } })(el)
+    .backgroundColor('rgba(0,0,0,0)')
+    .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+    .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+    .atmosphereColor('rgba(82, 183, 136, 0.5)')
+    .atmosphereAltitude(0.18)
+    .polygonsData(features)
+    .polygonCapColor(capColor)
+    .polygonSideColor(sideColor)
+    .polygonStrokeColor(feat => HGW[String(feat.id)] ? 'rgba(255,255,255,0.3)' : NONE)
+    .polygonAltitude(altFn)
+    .onPolygonHover(feat => {
+      const num    = feat ? String(feat.id) : null;
+      hoveredNum   = (feat && HGW[num]) ? num : null;
+      el.style.cursor = hoveredNum ? 'pointer' : 'grab';
+
+      // Redraw
+      globeInstance
+        .polygonCapColor(capColor)
+        .polygonSideColor(sideColor)
+        .polygonAltitude(altFn);
+
+      if (hoveredNum) showCard(feat);
+      else            hideCard();
+    })
+    .polygonLabel(() => null); // disable built-in label (we use custom card)
+
+  // ── Auto-rotate ──
+  const controls = globeInstance.controls();
+  controls.autoRotate      = true;
+  controls.autoRotateSpeed = 0.38;
+  controls.enableDamping   = true;
+  controls.dampingFactor   = 0.08;
+
+  // Stop on first interaction
+  controls.addEventListener('start', () => {
+    if (autoRotating) {
+      controls.autoRotate = false;
+      autoRotating = false;
+      if (hintEl) hintEl.style.opacity = '0';
+    }
+  });
+
+  // Point globe roughly toward Africa/Indonesia region on load
+  globeInstance.pointOfView({ lat: 5, lng: 25, altitude: 2.5 }, 0);
+}
+
+initGlobe().catch(err => {
+  console.error('Globe failed to load:', err);
+  const loadingEl = document.getElementById('globe-loading');
+  if (loadingEl) loadingEl.innerHTML = '<p style="color:rgba(255,255,255,0.5);font-size:0.875rem;padding:2rem;">Could not load globe. Check your connection.</p>';
+});
+</script>

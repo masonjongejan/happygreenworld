@@ -1,0 +1,189 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const programmes = await getCollection('programmes');
+  return programmes.map((programme) => ({
+    params: { slug: programme.data.slug },
+    props: { programme },
+  }));
+}
+
+const { programme } = Astro.props;
+const { Content } = await render(programme);
+
+const colorMap: Record<string, { text: string; bg: string; border: string }> = {
+  '#52B788': { text: '#2D6A4F', bg: 'rgba(82, 183, 136, 0.1)', border: 'rgba(82, 183, 136, 0.3)' },
+  '#74C0FC': { text: '#1864ab', bg: 'rgba(116, 192, 252, 0.12)', border: 'rgba(116, 192, 252, 0.35)' },
+  '#FFD166': { text: '#8a6200', bg: 'rgba(255, 209, 102, 0.15)', border: 'rgba(255, 209, 102, 0.4)' },
+};
+
+const colors = colorMap[programme.data.color] || { text: 'var(--color-primary)', bg: 'rgba(45, 106, 79, 0.1)', border: 'rgba(45, 106, 79, 0.3)' };
+---
+
+<PageLayout
+  title={programme.data.title}
+  description={programme.data.tagline}
+>
+  <!-- Hero -->
+  <section style={`background: linear-gradient(135deg, ${programme.data.color}22 0%, ${programme.data.color}11 100%); border-bottom: 1px solid ${colors.border}; padding: 5rem 1.5rem;`}>
+    <div style="max-width: 800px; margin: 0 auto;">
+      <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
+        <a href="/" style="font-size: 0.875rem; color: var(--color-text-muted); text-decoration: none;">Home</a>
+        <span style="font-size: 0.875rem; color: var(--color-border); margin: 0 0.5rem;">/</span>
+        <a href="/programmes" style="font-size: 0.875rem; color: var(--color-text-muted); text-decoration: none;">Programmes</a>
+        <span style="font-size: 0.875rem; color: var(--color-border); margin: 0 0.5rem;">/</span>
+        <span style="font-size: 0.875rem; color: var(--color-text);">{programme.data.title}</span>
+      </nav>
+
+      <span style={`
+        display: inline-block;
+        padding: 0.3rem 0.875rem;
+        background: ${colors.bg};
+        color: ${colors.text};
+        font-size: 0.875rem;
+        font-weight: 600;
+        border-radius: 99px;
+        margin-bottom: 1.25rem;
+      `}>
+        {programme.data.ageRange}
+      </span>
+
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--color-text); margin: 0 0 1rem;">
+        {programme.data.title}
+      </h1>
+      <p style="font-size: 1.1875rem; color: var(--color-text-muted); line-height: 1.65; margin: 0; max-width: 600px;">
+        {programme.data.tagline}
+      </p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section style="padding: 5rem 1.5rem; background: var(--color-bg);">
+    <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 1fr 280px; gap: 4rem;" class="content-grid">
+      <div class="prose-content" style="
+        font-size: 1.0625rem;
+        color: var(--color-text-muted);
+        line-height: 1.75;
+      ">
+        <Content />
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <div style="
+          position: sticky;
+          top: 2rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+        ">
+          <div style={`background: ${colors.bg}; border: 1px solid ${colors.border}; border-radius: 14px; padding: 1.5rem;`}>
+            <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--color-text); margin: 0 0 1rem;">
+              Programme details
+            </h3>
+            <dl style="margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+              <div>
+                <dt style="font-size: 0.8125rem; color: var(--color-text-muted); margin-bottom: 0.2rem;">Age range</dt>
+                <dd style="font-size: 0.9375rem; font-weight: 600; color: var(--color-text); margin: 0;">{programme.data.ageRange}</dd>
+              </div>
+              <div>
+                <dt style="font-size: 0.8125rem; color: var(--color-text-muted); margin-bottom: 0.2rem;">Topic</dt>
+                <dd style="font-size: 0.9375rem; font-weight: 600; color: var(--color-text); margin: 0;">{programme.data.title}</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 1.5rem;">
+            <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.75rem;">
+              Download materials
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6; margin: 0 0 1rem;">
+              Access our free educational resources, activity guides, and coloring sheets.
+            </p>
+            <a
+              href="/resources"
+              style="
+                display: block;
+                text-align: center;
+                padding: 0.75rem 1rem;
+                background: var(--color-primary);
+                color: #fff;
+                font-size: 0.9375rem;
+                font-weight: 600;
+                text-decoration: none;
+                border-radius: 10px;
+              "
+            >
+              View Resources →
+            </a>
+          </div>
+
+          <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 1.5rem;">
+            <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.75rem;">
+              Bring this to your community
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6; margin: 0 0 1rem;">
+              We localise our materials for each partner. Tell us about your organisation and we'll take it from there.
+            </p>
+            <a
+              href="/partner-with-us"
+              style="
+                display: block;
+                text-align: center;
+                padding: 0.75rem 1rem;
+                background: var(--color-accent);
+                color: var(--color-text);
+                font-size: 0.9375rem;
+                font-weight: 700;
+                text-decoration: none;
+                border-radius: 10px;
+              "
+            >
+              Partner With Us
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Other programmes -->
+  <section style="padding: 4rem 1.5rem; background: var(--color-surface); border-top: 1px solid var(--color-border);">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+      <a
+        href="/programmes"
+        style="font-size: 0.9375rem; font-weight: 600; color: var(--color-primary); text-decoration: none;"
+      >
+        ← View all programmes
+      </a>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .prose-content h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 2.5rem 0 1rem;
+  }
+  .prose-content h2:first-child { margin-top: 0; }
+  .prose-content p { margin: 0 0 1.25rem; }
+  .prose-content ul {
+    margin: 0 0 1.5rem;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .prose-content li { font-size: 1.0625rem; color: var(--color-text-muted); line-height: 1.65; }
+  .prose-content strong { color: var(--color-text); font-weight: 600; }
+
+  @media (max-width: 900px) {
+    .content-grid { grid-template-columns: 1fr !important; }
+    aside { display: none; }
+  }
+</style>

@@ -1,0 +1,106 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  photo?: string;
+  body: string;
+}
+
+const { name, role, photo, body } = Astro.props;
+const initials = name.split(' ').map(n => n[0]).join('').slice(0, 2);
+---
+
+<article class="team-card" style="
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease;
+">
+  <!-- Photo header -->
+  <div style="
+    position: relative;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(82, 183, 136, 0.12) 0%, rgba(45, 106, 79, 0.08) 100%);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  ">
+    {photo ? (
+      <img
+        src={photo}
+        alt={`Photo of ${name}`}
+        class="team-photo"
+        style="
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+          display: block;
+          padding: 1rem;
+          box-sizing: border-box;
+          transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+        "
+        loading="lazy"
+      />
+    ) : (
+      <div style="
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.5rem;
+      ">
+        <div style="
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          background: rgba(45, 106, 79, 0.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-display);
+          font-size: 1.75rem;
+          font-weight: 600;
+          color: var(--color-primary);
+          transition: transform 0.3s ease;
+        " class="team-initials">
+          {initials}
+        </div>
+      </div>
+    )}
+  </div>
+
+  <!-- Text content -->
+  <div style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column;">
+    <h3 style="font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.25rem;">
+      {name}
+    </h3>
+    <p style="font-size: 0.875rem; color: var(--color-primary); font-weight: 600; margin: 0 0 1rem;">
+      {role}
+    </p>
+    <p style="font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.65; margin: 0; flex: 1;">
+      {body}
+    </p>
+  </div>
+</article>
+
+<style>
+  .team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(45, 106, 79, 0.14);
+  }
+
+  .team-card:hover .team-photo {
+    transform: scale(1.04);
+  }
+
+  .team-card:hover .team-initials {
+    transform: scale(1.1);
+  }
+</style>
