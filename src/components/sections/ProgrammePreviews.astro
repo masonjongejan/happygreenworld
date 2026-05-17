@@ -9,6 +9,11 @@ const programmes = [
     icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 5,6 21,6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>`,
     ageRange: 'Ages 6–16',
     modules: '7 Activity Modules',
+    covers: [
+      { docId: '031024happygreentanzaniabg', label: 'Tanzania Waste Game' },
+      { docId: '200224boardgamehgp', label: 'Philippines Waste Game' },
+      { docId: '01072024bghgi', label: 'Indonesia Board Game' },
+    ],
   },
   {
     slug: 'water',
@@ -19,6 +24,11 @@ const programmes = [
     icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/><path d="M12 6v6l4 2"/></svg>`,
     ageRange: 'Ages 6–16',
     modules: 'Activities & Guides',
+    covers: [
+      { docId: '19.6.2020_hgw_water_game.issuu', label: 'HGW Water Game' },
+      { docId: 'issuuhgtsb', label: 'Tanzania Student Book' },
+      { docId: '030924sbvietnam', label: 'Vietnam Student Book' },
+    ],
   },
   {
     slug: 'energy',
@@ -29,6 +39,11 @@ const programmes = [
     icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
     ageRange: 'Ages 8–16',
     modules: 'Activities & Guides',
+    covers: [
+      { docId: '200224sbhgp', label: 'Philippines Student Book' },
+      { docId: 'agvietnam30082024', label: 'Vietnam Activity Guide' },
+      { docId: '100821afriquepropreetvert', label: 'Afrique Student Book' },
+    ],
   },
 ];
 ---
@@ -45,7 +60,7 @@ const programmes = [
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" class="programmes-grid">
-      {programmes.map(({ slug, title, description, color, bgColor, icon, ageRange, modules }, i) => (
+      {programmes.map(({ slug, title, description, color, bgColor, icon, ageRange, modules, covers }, i) => (
         <article
           data-animate
           data-delay={String(i + 1)}
@@ -83,9 +98,31 @@ const programmes = [
           <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.75rem;">
             {title}
           </h3>
-          <p style="font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.65; margin: 0 0 1.5rem; flex: 1;">
+          <p style="font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.65; margin: 0 0 1.25rem; flex: 1;">
             {description}
           </p>
+
+          <!-- Material cover thumbnails -->
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem;">
+            {covers.map(({ docId, label }) => (
+              <a
+                href={`https://issuu.com/happygreenworld/docs/${docId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={label}
+                style="display: block; flex-shrink: 0; border-radius: 5px; overflow: hidden; border: 1px solid var(--color-border); transition: transform 0.2s, box-shadow 0.2s;"
+                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.12)'"
+                onmouseout="this.style.transform=''; this.style.boxShadow=''"
+              >
+                <img
+                  src={`https://image.isu.pub/${docId}/jpg/page_1_thumb_large.jpg`}
+                  alt={label}
+                  loading="lazy"
+                  style="height: 56px; width: auto; display: block;"
+                />
+              </a>
+            ))}
+          </div>
 
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; font-size: 0.8125rem; color: var(--color-text-muted);">
             <span>{ageRange}</span>

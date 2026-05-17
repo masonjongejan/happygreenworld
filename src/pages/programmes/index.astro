@@ -9,6 +9,27 @@ const colorMap: Record<string, { text: string; bg: string }> = {
   '#74C0FC': { text: '#1864ab', bg: 'rgba(116, 192, 252, 0.15)' },
   '#FFD166': { text: '#8a6200', bg: 'rgba(255, 209, 102, 0.2)' },
 };
+
+const programmeCovers: Record<string, { docId: string; label: string }[]> = {
+  waste: [
+    { docId: '031024happygreentanzaniabg', label: 'Tanzania Waste Game' },
+    { docId: '200224boardgamehgp', label: 'Philippines Waste Game' },
+    { docId: 'generasi_bersih_indonesia_student_book', label: 'Indonesia Student Book' },
+    { docId: '01072024bghgi', label: 'Indonesia Board Game' },
+  ],
+  water: [
+    { docId: '19.6.2020_hgw_water_game.issuu', label: 'HGW Water Game' },
+    { docId: 'issuuhgtsb', label: 'Tanzania Student Book' },
+    { docId: '030924sbvietnam', label: 'Vietnam Student Book' },
+    { docId: 'agvietnam30082024', label: 'Vietnam Activity Guide' },
+  ],
+  energy: [
+    { docId: '200224sbhgp', label: 'Philippines Student Book' },
+    { docId: '200224hgpag', label: 'Philippines Activity Guide' },
+    { docId: 'agvietnam30082024', label: 'Vietnam Activity Guide' },
+    { docId: '100821afriquepropreetvert', label: 'Afrique Student Book' },
+  ],
+};
 ---
 
 <PageLayout
@@ -38,77 +59,106 @@ const colorMap: Record<string, { text: string; bg: string }> = {
       <div style="display: grid; gap: 2rem;">
         {programmes.map((programme) => {
           const colors = colorMap[programme.data.color] || { text: 'var(--color-primary)', bg: 'rgba(45, 106, 79, 0.1)' };
+          const covers = programmeCovers[programme.data.slug] || [];
           return (
             <article style="
               background: var(--color-surface);
               border: 1px solid var(--color-border);
               border-radius: 16px;
               padding: 2.5rem;
-              display: grid;
-              grid-template-columns: auto 1fr auto;
-              gap: 2rem;
-              align-items: center;
             " class="programme-row">
-              <div style={`
-                width: 72px;
-                height: 72px;
-                border-radius: 16px;
-                background: ${colors.bg};
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-shrink: 0;
-              `}>
+              <!-- Top row: icon + title + button -->
+              <div style="display: grid; grid-template-columns: auto 1fr auto; gap: 2rem; align-items: center; margin-bottom: 1.5rem;" class="programme-top">
                 <div style={`
-                  width: 40px;
-                  height: 40px;
-                  border-radius: 50%;
-                  background: ${programme.data.color};
-                  opacity: 0.7;
-                `} aria-hidden="true"></div>
-              </div>
-
-              <div>
-                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.625rem;">
-                  <h2 style="font-family: var(--font-display); font-size: 1.375rem; font-weight: 600; color: var(--color-text); margin: 0;">
-                    {programme.data.title}
-                  </h2>
-                  <span style={`
-                    display: inline-block;
-                    padding: 0.25rem 0.625rem;
-                    background: ${colors.bg};
-                    color: ${colors.text};
-                    font-size: 0.8125rem;
-                    font-weight: 600;
-                    border-radius: 99px;
-                  `}>
-                    {programme.data.ageRange}
-                  </span>
-                </div>
-                <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">
-                  {programme.data.tagline}
-                </p>
-              </div>
-
-              <a
-                href={`/programmes/${programme.data.slug}`}
-                style="
-                  display: inline-flex;
+                  width: 72px;
+                  height: 72px;
+                  border-radius: 16px;
+                  background: ${colors.bg};
+                  display: flex;
                   align-items: center;
-                  gap: 0.375rem;
-                  padding: 0.75rem 1.375rem;
-                  background: var(--color-primary);
-                  color: #fff;
-                  font-size: 0.9375rem;
-                  font-weight: 600;
-                  text-decoration: none;
-                  border-radius: 10px;
-                  white-space: nowrap;
+                  justify-content: center;
                   flex-shrink: 0;
-                "
-              >
-                Learn more
-              </a>
+                `}>
+                  <div style={`
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background: ${programme.data.color};
+                    opacity: 0.7;
+                  `} aria-hidden="true"></div>
+                </div>
+
+                <div>
+                  <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.625rem;">
+                    <h2 style="font-family: var(--font-display); font-size: 1.375rem; font-weight: 600; color: var(--color-text); margin: 0;">
+                      {programme.data.title}
+                    </h2>
+                    <span style={`
+                      display: inline-block;
+                      padding: 0.25rem 0.625rem;
+                      background: ${colors.bg};
+                      color: ${colors.text};
+                      font-size: 0.8125rem;
+                      font-weight: 600;
+                      border-radius: 99px;
+                    `}>
+                      {programme.data.ageRange}
+                    </span>
+                  </div>
+                  <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">
+                    {programme.data.tagline}
+                  </p>
+                </div>
+
+                <a
+                  href={`/programmes/${programme.data.slug}`}
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.375rem;
+                    padding: 0.75rem 1.375rem;
+                    background: var(--color-primary);
+                    color: #fff;
+                    font-size: 0.9375rem;
+                    font-weight: 600;
+                    text-decoration: none;
+                    border-radius: 10px;
+                    white-space: nowrap;
+                    flex-shrink: 0;
+                  "
+                >
+                  Learn more
+                </a>
+              </div>
+
+              <!-- Material cover strip -->
+              {covers.length > 0 && (
+                <div style={`border-top: 1px solid var(--color-border); padding-top: 1.25rem;`}>
+                  <p style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin: 0 0 0.75rem;">
+                    Programme Materials
+                  </p>
+                  <div style="display: flex; gap: 0.625rem; flex-wrap: wrap;">
+                    {covers.map(({ docId, label }) => (
+                      <a
+                        href={`https://issuu.com/happygreenworld/docs/${docId}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={label}
+                        style="display: block; border-radius: 6px; overflow: hidden; border: 1px solid var(--color-border); flex-shrink: 0; transition: transform 0.2s, box-shadow 0.2s;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.12)'"
+                        onmouseout="this.style.transform=''; this.style.boxShadow=''"
+                      >
+                        <img
+                          src={`https://image.isu.pub/${docId}/jpg/page_1_thumb_large.jpg`}
+                          alt={label}
+                          loading="lazy"
+                          style="height: 72px; width: auto; display: block;"
+                        />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </article>
           );
         })}
@@ -148,7 +198,7 @@ const colorMap: Record<string, { text: string; bg: string }> = {
 
 <style>
   @media (max-width: 700px) {
-    .programme-row {
+    .programme-top {
       grid-template-columns: 1fr !important;
       gap: 1.25rem !important;
     }

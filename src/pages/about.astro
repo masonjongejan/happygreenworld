@@ -73,6 +73,114 @@ const teamMembers = (await getCollection('team')).sort((a, b) => a.data.order - 
     </div>
   </section>
 
+  <!-- Who / What / Why / How -->
+  <section style="padding: 5rem 1.5rem; background: var(--color-surface); border-top: 1px solid var(--color-border);">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--color-text); margin: 0 0 2.5rem; text-align: center;">
+        Who we are, what we do, and why it matters
+      </h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;" class="mission-cards-grid">
+
+        <!-- WHO -->
+        <div style="
+          border-radius: 14px;
+          padding: 2rem;
+          background: rgba(82, 183, 136, 0.08);
+          border: 1px solid rgba(82, 183, 136, 0.25);
+        ">
+          <div style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: #52B788;
+            margin-bottom: 1rem;
+          " aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.75rem;">Who</h3>
+          <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.7; margin: 0;">
+            The Happy Green World Foundation develops educational programs regarding waste, water and energy with the aim to encourage sustainable behaviour in children aged 4 to 16 years old.
+          </p>
+        </div>
+
+        <!-- WHAT -->
+        <div style="
+          border-radius: 14px;
+          padding: 2rem;
+          background: rgba(116, 192, 252, 0.1);
+          border: 1px solid rgba(116, 192, 252, 0.3);
+        ">
+          <div style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: #74C0FC;
+            margin-bottom: 1rem;
+          " aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.75rem;">What</h3>
+          <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.7; margin: 0;">
+            Our quality educational programs consist of practical and playful activity guides, student books and games. The educational materials are custom made regarding illustrations, translation and content — adapting to the partner's country, culture, language and customs.
+          </p>
+        </div>
+
+        <!-- WHY -->
+        <div style="
+          border-radius: 14px;
+          padding: 2rem;
+          background: rgba(244, 162, 97, 0.08);
+          border: 1px solid rgba(244, 162, 97, 0.25);
+        ">
+          <div style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: #F4A261;
+            margin-bottom: 1rem;
+          " aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          </div>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.75rem;">Why</h3>
+          <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.7; margin: 0;">
+            Our goal is to offer environmental education in the curriculum of countries all over the world. Children who learn sustainable behaviour at a young age will become adults who actively contribute to a cleaner and healthier living environment — a Happy Green World!
+          </p>
+        </div>
+
+        <!-- HOW -->
+        <div style="
+          border-radius: 14px;
+          padding: 2rem;
+          background: rgba(255, 209, 102, 0.1);
+          border: 1px solid rgba(255, 209, 102, 0.35);
+        ">
+          <div style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: #FFD166;
+            margin-bottom: 1rem;
+          " aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a4200" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.75rem;">How</h3>
+          <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.7; margin: 0;">
+            Partner with us and teach environmental education in your local community. We guide you through every step of a successful project. Partners are encouraged to find a local sponsor to fund development and printing — and their logos can be displayed on the educational materials.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- Founding story section -->
   <section style="padding: 4rem 1.5rem; background: var(--color-surface); border-top: 1px solid var(--color-border);">
     <div style="max-width: 800px; margin: 0 auto;">
@@ -129,11 +237,13 @@ const teamMembers = (await getCollection('team')).sort((a, b) => a.data.order - 
   <section style="padding: 2rem 0; background: var(--color-bg); overflow: hidden;">
     <div style="display: flex; gap: 0.75rem; padding: 0 1.5rem; overflow-x: auto; scrollbar-width: none;" class="photo-strip">
       {[
+        { src: '/images/booklet-philippines-children.png', alt: 'Children with Happy Green World books in the Philippines' },
+        { src: '/images/booklet-botswana-classroom.png', alt: 'Classroom in Botswana holding up Happy Green World student books' },
+        { src: '/images/booklet-children-outdoor.png', alt: 'Children reading Happy Green World materials outdoors' },
         { src: '/images/about-indonesia-reading.jpg', alt: 'Students reading Happy Green World materials in Indonesia' },
         { src: '/images/about-cameroon.jpg', alt: 'Happy Green World programme activities in Cameroon' },
         { src: '/images/country-thailand-programme.jpg', alt: 'Happy Green World programme in Thailand' },
         { src: '/images/about-australia.jpg', alt: 'Happy Green World activities in Australia' },
-        { src: '/images/about-perth.jpg', alt: 'Happy Green World foundation team in Perth, Australia' },
       ].map(({ src, alt }) => (
         <div style="
           flex-shrink: 0;
@@ -230,6 +340,7 @@ const teamMembers = (await getCollection('team')).sort((a, b) => a.data.order - 
 <style>
   @media (max-width: 768px) {
     .mission-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+    .mission-cards-grid { grid-template-columns: 1fr !important; }
     .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
   }
 </style>

@@ -3,15 +3,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 
 const downloads = (await getCollection('downloads')).sort((a, b) => a.data.order - b.data.order);
-const activityModules = downloads.filter(d => d.data.type === 'activity');
 const coloringSheets = downloads.filter(d => d.data.type === 'coloring');
-
-const topicColors: Record<string, { text: string; bg: string }> = {
-  waste: { text: '#2D6A4F', bg: 'rgba(82, 183, 136, 0.15)' },
-  water: { text: '#1864ab', bg: 'rgba(116, 192, 252, 0.2)' },
-  energy: { text: '#8a6200', bg: 'rgba(255, 209, 102, 0.3)' },
-  general: { text: 'var(--color-text-muted)', bg: 'rgba(107, 123, 107, 0.12)' },
-};
 
 const videos = [
   {
@@ -30,11 +22,66 @@ const videos = [
     embedUrl: 'https://www.youtube.com/embed/placeholder3',
   },
 ];
+
+const publications = [
+  {
+    region: 'Africa — English',
+    items: [
+      { title: 'Happy Green Tanzania Student Book', docId: 'issuuhgtsb' },
+      { title: 'Happy Green Tanzania Activity Guide', docId: '031024aghappygreentanzaniaengels' },
+      { title: 'Happy Green Tanzania Board Game', docId: '031024happygreentanzaniabg' },
+      { title: 'Kilimanjaro Game', docId: '4.03_kilimanjaro_game_front__back' },
+    ],
+  },
+  {
+    region: 'Africa — French',
+    items: [
+      { title: 'Activity Guide Afrique Propre et Verte', docId: 'activity_guide_afrique_propre_et_verte' },
+      { title: "L'Afrique Propre et Verte — Cahier de l'élève", docId: '100821afriquepropreetvert' },
+      { title: "Le Jeu L'Afrique Propre et Verte", docId: '100729hgaboardgame' },
+      { title: 'Happy Green Madagascar', docId: '300723happygreenmadagascar' },
+    ],
+  },
+  {
+    region: 'Asia & Pacific',
+    items: [
+      { title: 'Generasi Bersih Indonesia Student Book', docId: 'generasi_bersih_indonesia_student_book' },
+      { title: 'Generasi Bersih Indonesia Activity Guide', docId: 'generasi_bersih_indonesia_-_panduan_kegiatan_' },
+      { title: 'Boardgame Generasi Bersih Indonesia', docId: '_boardgame_genera_i_bersih_indonesia' },
+      { title: 'Selamat Menghijaukan Indonesia Student Book', docId: '180724sbhgifinal' },
+      { title: 'Panduan Kegiatan Selamat Menghijaukan Indonesia', docId: '31082024aghgi' },
+      { title: 'Happy Green Indonesia Board Game', docId: '01072024bghgi' },
+      { title: 'Happy Green Philippines Student Book', docId: '200224sbhgp' },
+      { title: 'Happy Green Philippines Activity Guide', docId: '200224hgpag' },
+      { title: 'Happy Green Philippines Waste Game', docId: '200224boardgamehgp' },
+      { title: 'Happy Green Vietnam Student Book', docId: '030924sbvietnam' },
+      { title: 'Happy Green Vietnam Activity Guide', docId: 'agvietnam30082024' },
+      { title: 'Happy Green Vietnam Waste Game', docId: '170724hgvbg' },
+      { title: 'Happy Green Thailand', docId: 'thai_student_book_pdf_print' },
+      { title: 'Endangered Aussie Animal Game', docId: '18-2-2022aussieendangeredanimalgameissuu' },
+    ],
+  },
+  {
+    region: 'Americas',
+    items: [
+      { title: 'Galápagos Verde y Feliz — Libro del alumno', docId: 'gal_pagos_verde_y_feliz_-_libro_del_alumno' },
+      { title: 'Guía de actividades Galápagos Verde Y Feliz', docId: '10.12.2025aggalapagosverdeyfelizcopy' },
+      { title: 'Juego Galápagos Verde y Feliz', docId: 'juego_gal_pagos_verde_y_feliz' },
+      { title: 'Peru Verde Y Feliz', docId: '141121sbperu' },
+    ],
+  },
+  {
+    region: 'Global',
+    items: [
+      { title: 'Happy Green World Water Game', docId: '19.6.2020_hgw_water_game.issuu' },
+    ],
+  },
+];
 ---
 
 <PageLayout
   title="Resources"
-  description="Download free educational materials from Happy Green World — activity guides, student workbooks, and coloring sheets on waste, water, and energy for children aged 6–16."
+  description="Browse Happy Green World's full library of student books, activity guides, and board games on Issuu — covering waste, water, and energy education in 9 languages across 25 countries."
 >
   <!-- Hero -->
   <section style="background: linear-gradient(135deg, #2D6A4F 0%, #1e4d38 100%); padding: 5rem 1.5rem; color: #fff;">
@@ -48,12 +95,15 @@ const videos = [
         Educational Resources
       </h1>
       <p style="font-size: 1.125rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0; max-width: 600px; margin-left: auto; margin-right: auto;">
-        Download our free activity guides, coloring sheets, and student materials — or watch our programme in action.
+        Browse our full library of materials on Issuu, download free coloring sheets, or watch our programmes in action.
       </p>
 
       <div style="display: flex; gap: 0.875rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
-        <a href="#downloads" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(255,255,255,0.15); color: #fff; font-size: 0.9375rem; font-weight: 600; text-decoration: none; border-radius: 10px; border: 1px solid rgba(255,255,255,0.25);">
-          Downloads
+        <a href="#materials" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(255,255,255,0.15); color: #fff; font-size: 0.9375rem; font-weight: 600; text-decoration: none; border-radius: 10px; border: 1px solid rgba(255,255,255,0.25);">
+          Our Materials
+        </a>
+        <a href="#publications" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(255,255,255,0.15); color: #fff; font-size: 0.9375rem; font-weight: 600; text-decoration: none; border-radius: 10px; border: 1px solid rgba(255,255,255,0.25);">
+          All Publications
         </a>
         <a href="#videos" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(255,255,255,0.15); color: #fff; font-size: 0.9375rem; font-weight: 600; text-decoration: none; border-radius: 10px; border: 1px solid rgba(255,255,255,0.25);">
           Videos
@@ -62,159 +112,212 @@ const videos = [
     </div>
   </section>
 
-  <!-- Downloads section -->
-  <section id="downloads" style="padding: 5rem 1.5rem; background: var(--color-bg);">
+  <!-- Issuu embed -->
+  <section id="materials" style="padding: 5rem 1.5rem; background: var(--color-bg);">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div style="margin-bottom: 2rem;">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--color-text); margin: 0 0 0.75rem;">
+          Browse Our Materials
+        </h2>
+        <p style="font-size: 1rem; color: var(--color-text-muted); margin: 0; line-height: 1.65; max-width: 680px;">
+          Our full library of student books, activity guides, and board games is available on Issuu — covering waste, water, and energy programmes in 9 languages across 25 countries.
+        </p>
+      </div>
+
+      <div style="border-radius: 14px; overflow: hidden; border: 1px solid var(--color-border);">
+        <iframe
+          src="https://e.issuu.com/embed.html#u=happygreenworld"
+          width="100%"
+          height="600"
+          frameborder="0"
+          allowfullscreen
+          title="Happy Green World publications on Issuu"
+          loading="lazy"
+          style="display: block;"
+        ></iframe>
+      </div>
+
+      <div style="margin-top: 1.25rem; text-align: center;">
+        <a
+          href="https://issuu.com/happygreenworld?ps=24"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(45, 106, 79, 0.08);
+            color: var(--color-primary);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+            border: 1px solid rgba(45, 106, 79, 0.2);
+          "
+        >
+          Open full library on Issuu
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications gallery -->
+  <section id="publications" style="padding: 5rem 1.5rem; background: var(--color-surface); border-top: 1px solid var(--color-border);">
     <div style="max-width: 1100px; margin: 0 auto;">
       <div style="margin-bottom: 3rem;">
         <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--color-text); margin: 0 0 0.75rem;">
-          Activity Modules
+          Our Publications Around the World
         </h2>
-        <p style="font-size: 1rem; color: var(--color-text-muted); margin: 0 0 2rem; line-height: 1.65;">
-          Each module is a self-contained 45–60 minute classroom activity, designed to be run by a teacher or facilitator with minimal preparation.
+        <p style="font-size: 1rem; color: var(--color-text-muted); margin: 0; line-height: 1.65; max-width: 680px;">
+          Every Happy Green World programme is localised for its community — custom illustrations, local language, and culturally relevant content. Click any cover to read it on Issuu.
         </p>
-
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;" class="downloads-grid">
-          {activityModules.map((item) => {
-            const colors = topicColors[item.data.topic] || topicColors.general;
-            return (
-              <article style="
-                background: var(--color-surface);
-                border: 1px solid var(--color-border);
-                border-radius: 14px;
-                padding: 1.5rem;
-                display: flex;
-                flex-direction: column;
-              ">
-                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 1rem;">
-                  <span style={`
-                    display: inline-block;
-                    padding: 0.25rem 0.625rem;
-                    background: ${colors.bg};
-                    color: ${colors.text};
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                    border-radius: 99px;
-                    flex-shrink: 0;
-                  `}>
-                    {item.data.topic.charAt(0).toUpperCase() + item.data.topic.slice(1)}
-                  </span>
-                  {item.data.duration && (
-                    <span style="font-size: 0.75rem; color: var(--color-text-muted); flex-shrink: 0;">
-                      {item.data.duration}
-                    </span>
-                  )}
-                </div>
-
-                <h3 style="font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.5rem; flex: 1;">
-                  {item.data.title}
-                </h3>
-
-                {item.data.ageRange && (
-                  <p style="font-size: 0.8125rem; color: var(--color-text-muted); margin: 0 0 1rem;">
-                    {item.data.ageRange}
-                  </p>
-                )}
-
-                <a
-                  href={`/downloads/${item.data.filename}`}
-                  download
-                  style="
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 0.5rem;
-                    padding: 0.625rem 1rem;
-                    background: rgba(45, 106, 79, 0.08);
-                    color: var(--color-primary);
-                    font-size: 0.875rem;
-                    font-weight: 600;
-                    text-decoration: none;
-                    border-radius: 8px;
-                    border: 1px solid rgba(45, 106, 79, 0.2);
-                    margin-top: auto;
-                  "
-                >
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                  </svg>
-                  Download PDF
-                </a>
-              </article>
-            );
-          })}
-        </div>
       </div>
 
-      <!-- Coloring sheets -->
-      <div>
-        <h2 style="font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.625rem); color: var(--color-text); margin: 0 0 0.75rem;">
-          Coloring Sheets
-        </h2>
-        <p style="font-size: 1rem; color: var(--color-text-muted); margin: 0 0 2rem; line-height: 1.65;">
-          Free printable coloring sheets for younger children.
-        </p>
+      {publications.map(({ region, items }) => (
+        <div style="margin-bottom: 3rem;">
+          <h3 style="
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin: 0 0 1.25rem;
+            padding-bottom: 0.625rem;
+            border-bottom: 1px solid var(--color-border);
+          ">
+            {region}
+          </h3>
+          <div class="pub-grid">
+            {items.map(({ title, docId }) => (
+              <a
+                href={`https://issuu.com/happygreenworld/docs/${docId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style="text-decoration: none; color: inherit;"
+                class="pub-card"
+              >
+                <div style="
+                  aspect-ratio: 4/5;
+                  border-radius: 8px;
+                  overflow: hidden;
+                  border: 1px solid var(--color-border);
+                  background: rgba(45, 106, 79, 0.04);
+                  margin-bottom: 0.625rem;
+                  position: relative;
+                ">
+                  <img
+                    src={`https://image.isu.pub/${docId}/jpg/page_1_thumb_large.jpg`}
+                    alt={title}
+                    loading="lazy"
+                    style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                  />
+                  <div style="
+                    display: none;
+                    position: absolute; inset: 0;
+                    align-items: center; justify-content: center;
+                    background: rgba(45, 106, 79, 0.06);
+                    padding: 0.75rem;
+                    text-align: center;
+                  ">
+                    <span style="font-size: 0.75rem; color: var(--color-text-muted); line-height: 1.4;">{title}</span>
+                  </div>
+                </div>
+                <p style="
+                  font-size: 0.75rem;
+                  line-height: 1.4;
+                  color: var(--color-text);
+                  margin: 0;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 3;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;
+                ">
+                  {title}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
 
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; max-width: 640px;" class="coloring-grid">
-          {coloringSheets.map((item) => (
-            <article style="
-              background: var(--color-surface);
-              border: 1px solid var(--color-border);
-              border-radius: 14px;
-              padding: 1.5rem;
+  <!-- Coloring sheets -->
+  <section id="downloads" style="padding: 5rem 1.5rem; background: var(--color-bg); border-top: 1px solid var(--color-border);">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.625rem); color: var(--color-text); margin: 0 0 0.75rem;">
+        Coloring Sheets
+      </h2>
+      <p style="font-size: 1rem; color: var(--color-text-muted); margin: 0 0 2rem; line-height: 1.65;">
+        Free printable coloring sheets for younger children.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; max-width: 640px;" class="coloring-grid">
+        {coloringSheets.map((item) => (
+          <article style="
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+          ">
+            <div style="
+              width: 100%;
+              aspect-ratio: 4/3;
+              border-radius: 8px;
+              background: rgba(45, 106, 79, 0.06);
+              margin-bottom: 1rem;
+              overflow: hidden;
               display: flex;
-              flex-direction: column;
+              align-items: center;
+              justify-content: center;
             ">
-              <div style="
-                width: 100%;
-                aspect-ratio: 4/3;
-                border-radius: 8px;
-                background: rgba(45, 106, 79, 0.06);
-                margin-bottom: 1rem;
-                overflow: hidden;
-                display: flex;
+              <img
+                src={item.data.filename === 'coloringsheetanimals.pdf' ? '/images/download-coloring-sheet-animals.png' : '/images/download-colorsheet-hgw.png'}
+                alt={item.data.title}
+                style="width: 100%; height: 100%; object-fit: cover;"
+                loading="lazy"
+              />
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--color-text); margin: 0 0 1rem; flex: 1;">
+              {item.data.title}
+            </h3>
+            <a
+              href={`/downloads/${item.data.filename}`}
+              download
+              style="
+                display: inline-flex;
                 align-items: center;
                 justify-content: center;
-              ">
-                <img
-                  src={item.data.filename === 'coloringsheetanimals.pdf' ? '/images/download-coloring-sheet-animals.png' : '/images/download-colorsheet-hgw.png'}
-                  alt={item.data.title}
-                  style="width: 100%; height: 100%; object-fit: cover;"
-                  loading="lazy"
-                />
-              </div>
-              <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--color-text); margin: 0 0 1rem; flex: 1;">
-                {item.data.title}
-              </h3>
-              <a
-                href={`/downloads/${item.data.filename}`}
-                download
-                style="
-                  display: inline-flex;
-                  align-items: center;
-                  justify-content: center;
-                  gap: 0.5rem;
-                  padding: 0.625rem 1rem;
-                  background: rgba(45, 106, 79, 0.08);
-                  color: var(--color-primary);
-                  font-size: 0.875rem;
-                  font-weight: 600;
-                  text-decoration: none;
-                  border-radius: 8px;
-                  border: 1px solid rgba(45, 106, 79, 0.2);
-                "
-              >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="7 10 12 15 17 10"/>
-                  <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                Download PDF
-              </a>
-            </article>
-          ))}
-        </div>
+                gap: 0.5rem;
+                padding: 0.625rem 1rem;
+                background: rgba(45, 106, 79, 0.08);
+                color: var(--color-primary);
+                font-size: 0.875rem;
+                font-weight: 600;
+                text-decoration: none;
+                border-radius: 8px;
+                border: 1px solid rgba(45, 106, 79, 0.2);
+              "
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Download PDF
+            </a>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -292,12 +395,24 @@ const videos = [
 </PageLayout>
 
 <style>
-  @media (max-width: 900px) {
-    .downloads-grid { grid-template-columns: 1fr 1fr !important; }
-    .videos-grid { grid-template-columns: 1fr !important; }
+  .pub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+  .pub-card {
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .pub-card:hover {
+    transform: translateY(-3px);
+    opacity: 0.85;
   }
   @media (max-width: 600px) {
-    .downloads-grid { grid-template-columns: 1fr !important; }
+    .pub-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 0.75rem; }
     .coloring-grid { grid-template-columns: 1fr !important; }
+    .videos-grid { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 900px) {
+    .videos-grid { grid-template-columns: 1fr !important; }
   }
 </style>
