@@ -58,17 +58,50 @@ const sortedRegions = regionOrder.filter(r => byRegion[r]);
 
   <!-- World map -->
   <section style="padding: 4rem 1.5rem; background: var(--color-bg);">
-    <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
-      <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--color-text); margin: 0 0 2rem;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--color-text); margin: 0 0 2rem; text-align: center;">
         Where we work
       </h2>
-      <div style="border-radius: 16px; overflow: hidden; border: 1px solid var(--color-border);">
-        <img
-          src="/images/countries-world-map.jpg"
-          alt="World map showing countries where Happy Green World operates: Cameroon, Ghana, Congo, Egypt, Ethiopia, Indonesia, Molluccas, Senegal, Sierra Leone, Thailand, Netherlands, Australia"
-          style="width: 100%; height: auto; display: block;"
-          loading="lazy"
-        />
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch;" class="map-grid">
+        <!-- Partners & countries table -->
+        <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; overflow: hidden;">
+          <div style="background: var(--color-primary); padding: 1rem 1.5rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7);">Country</span>
+              <span style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7);">Partner / Distributor</span>
+            </div>
+          </div>
+          <div style="padding: 0.5rem 0;">
+            {[
+              { country: 'Australia', partner: 'Happy Green World' },
+              { country: 'Cameroon', partner: 'Bénévoles Océan & Main de Rêve' },
+              { country: 'Congo', partner: 'REC ASBL' },
+              { country: 'Egypt', partner: 'El Kalema' },
+              { country: 'Ethiopia', partner: 'DMA / Elf Gasha' },
+              { country: 'Ghana', partner: 'Fariad' },
+              { country: 'Indonesia', partner: 'International Waste Platform / Happy Green Islands' },
+              { country: 'Netherlands', partner: 'Happy Green World' },
+              { country: 'Senegal', partner: 'Cascades' },
+              { country: 'Sierra Leone', partner: 'Comin-SL' },
+              { country: 'Thailand', partner: 'The British International School of Phuket' },
+            ].map(({ country, partner }, i) => (
+              <div style={`display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0.625rem 1.5rem; background: ${i % 2 === 0 ? 'transparent' : 'rgba(45,106,79,0.04)'};`}>
+                <span style="font-size: 0.875rem; font-weight: 600; color: var(--color-text);">{country}</span>
+                <span style="font-size: 0.875rem; color: var(--color-text-muted);">{partner}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Map image -->
+        <div style="border-radius: 16px; overflow: hidden; border: 1px solid var(--color-border);">
+          <img
+            src="/images/booklet-projects-map.png"
+            alt="World map showing all countries where Happy Green World operates"
+            style="width: 100%; height: 100%; object-fit: cover; display: block;"
+            loading="lazy"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -190,6 +223,7 @@ const sortedRegions = regionOrder.filter(r => byRegion[r]);
 <style>
   @media (max-width: 768px) {
     .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .map-grid { grid-template-columns: 1fr !important; }
     .country-grid { grid-template-columns: 1fr 1fr !important; }
     .steps-grid { grid-template-columns: 1fr !important; }
   }
