@@ -10,9 +10,9 @@ const programmes = [
     ageRange: 'Ages 6–16',
     modules: '7 Activity Modules',
     covers: [
-      { docId: '031024happygreentanzaniabg', label: 'Tanzania Waste Game' },
-      { docId: '200224boardgamehgp', label: 'Philippines Waste Game' },
-      { docId: '01072024bghgi', label: 'Indonesia Board Game' },
+      { img: 'https://image.isu.pub/241107155913-594b6739615cc3a01953ad97b7ad48dc/jpg/page_1_thumb_large.jpg', label: 'Tanzania Student Book', docId: 'issuuhgtsb' },
+      { img: 'https://image.isu.pub/241107154947-bf1e5f463bf1098e1ff2a7f9b092b2fe/jpg/page_1_thumb_large.jpg', label: 'Tanzania Activity Guide', docId: '031024aghappygreentanzaniaengels' },
+      { img: 'https://image.isu.pub/241107161605-c4c8aa09c23c215f5d0fa6056cf4fe08/jpg/page_1_thumb_large.jpg', label: 'Tanzania Board Game', docId: '031024happygreentanzaniabg' },
     ],
   },
   {
@@ -25,9 +25,9 @@ const programmes = [
     ageRange: 'Ages 6–16',
     modules: 'Activities & Guides',
     covers: [
-      { docId: '19.6.2020_hgw_water_game.issuu', label: 'HGW Water Game' },
-      { docId: 'issuuhgtsb', label: 'Tanzania Student Book' },
-      { docId: '030924sbvietnam', label: 'Vietnam Student Book' },
+      { img: 'https://image.isu.pub/241107155913-594b6739615cc3a01953ad97b7ad48dc/jpg/page_1_thumb_large.jpg', label: 'Tanzania Student Book', docId: 'issuuhgtsb' },
+      { img: 'https://image.isu.pub/241107154947-bf1e5f463bf1098e1ff2a7f9b092b2fe/jpg/page_1_thumb_large.jpg', label: 'Tanzania Activity Guide', docId: '031024aghappygreentanzaniaengels' },
+      { img: 'https://image.isu.pub/200619055200-cf0bd72947dcc96efe96ef8f4b72a7df/jpg/page_1_thumb_large.jpg', label: 'HGW Water Game', docId: '19.6.2020_hgw_water_game.issuu' },
     ],
   },
   {
@@ -40,9 +40,9 @@ const programmes = [
     ageRange: 'Ages 8–16',
     modules: 'Activities & Guides',
     covers: [
-      { docId: '200224sbhgp', label: 'Philippines Student Book' },
-      { docId: 'agvietnam30082024', label: 'Vietnam Activity Guide' },
-      { docId: '100821afriquepropreetvert', label: 'Afrique Student Book' },
+      { img: 'https://image.isu.pub/240326202259-c30fc83bec9800a45efb8f4ddfd41a74/jpg/page_1_thumb_large.jpg', label: 'Philippines Student Book', docId: '200224sbhgp' },
+      { img: 'https://image.isu.pub/241113111824-69ec82d9dce708d9346d2fac78b973bd/jpg/page_1_thumb_large.jpg', label: 'Vietnam Activity Guide', docId: 'agvietnam30082024' },
+      { img: 'https://image.isu.pub/230213155024-a3104178e983ddea46e0da56fa04ab2b/jpg/page_1_thumb_large.jpg', label: 'Afrique Student Book', docId: '100821afriquepropreetvert' },
     ],
   },
 ];
@@ -103,8 +103,21 @@ const programmes = [
           </p>
 
           <!-- Material cover thumbnails -->
+          {slug === 'energy' ? (
+            <div style="position: relative; display: inline-flex; gap: 0.5rem; margin-bottom: 1.25rem;">
+              {covers.map(({ img, label }) => (
+                <div style="border-radius: 5px; overflow: hidden; border: 1px solid var(--color-border); flex-shrink: 0;">
+                  <img src={img} alt={label} loading="lazy" style="height: 56px; width: auto; display: block; filter: blur(3px) brightness(0.55);" />
+                </div>
+              ))}
+              <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+                <span class="cs-badge" style="font-size: 0.625rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #FFD166; line-height: 1;">Coming Soon</span>
+                <span class="cs-dots" style="font-size: 0.75rem; color: rgba(255,209,102,0.7);">•••</span>
+              </div>
+            </div>
+          ) : (
           <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem;">
-            {covers.map(({ docId, label }) => (
+            {covers.map(({ img, label, docId }) => (
               <a
                 href={`https://issuu.com/happygreenworld/docs/${docId}`}
                 target="_blank"
@@ -115,7 +128,7 @@ const programmes = [
                 onmouseout="this.style.transform=''; this.style.boxShadow=''"
               >
                 <img
-                  src={`https://image.isu.pub/${docId}/jpg/page_1_thumb_large.jpg`}
+                  src={img}
                   alt={label}
                   loading="lazy"
                   style="height: 56px; width: auto; display: block;"
@@ -123,10 +136,11 @@ const programmes = [
               </a>
             ))}
           </div>
+          )}
 
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; font-size: 0.8125rem; color: var(--color-text-muted);">
             <span>{ageRange}</span>
-            <span>{modules}</span>
+            <span>{slug === 'energy' ? '🔜 Coming Soon' : modules}</span>
           </div>
 
           <a
@@ -174,4 +188,15 @@ const programmes = [
   .prog-card:hover .prog-arrow {
     transform: translateX(4px);
   }
+
+  @keyframes cs-glow {
+    0%, 100% { opacity: 1; text-shadow: 0 0 6px rgba(255,209,102,0.7); }
+    50% { opacity: 0.6; text-shadow: 0 0 14px rgba(255,209,102,1); }
+  }
+  @keyframes cs-bounce {
+    0%, 100% { letter-spacing: 0.1em; }
+    50% { letter-spacing: 0.3em; }
+  }
+  .cs-badge { animation: cs-glow 1.8s ease-in-out infinite; }
+  .cs-dots { animation: cs-bounce 1.4s ease-in-out infinite; }
 </style>

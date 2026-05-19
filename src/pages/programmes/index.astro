@@ -10,24 +10,24 @@ const colorMap: Record<string, { text: string; bg: string }> = {
   '#FFD166': { text: '#8a6200', bg: 'rgba(255, 209, 102, 0.2)' },
 };
 
-const programmeCovers: Record<string, { docId: string; label: string }[]> = {
+const programmeCovers: Record<string, { img: string; label: string; docId: string }[]> = {
   waste: [
-    { docId: '031024happygreentanzaniabg', label: 'Tanzania Waste Game' },
-    { docId: '200224boardgamehgp', label: 'Philippines Waste Game' },
-    { docId: 'generasi_bersih_indonesia_student_book', label: 'Indonesia Student Book' },
-    { docId: '01072024bghgi', label: 'Indonesia Board Game' },
+    { img: 'https://image.isu.pub/241107155913-594b6739615cc3a01953ad97b7ad48dc/jpg/page_1_thumb_large.jpg', label: 'Tanzania Student Book', docId: 'issuuhgtsb' },
+    { img: 'https://image.isu.pub/241107154947-bf1e5f463bf1098e1ff2a7f9b092b2fe/jpg/page_1_thumb_large.jpg', label: 'Tanzania Activity Guide', docId: '031024aghappygreentanzaniaengels' },
+    { img: 'https://image.isu.pub/241107161605-c4c8aa09c23c215f5d0fa6056cf4fe08/jpg/page_1_thumb_large.jpg', label: 'Tanzania Board Game', docId: '031024happygreentanzaniabg' },
+    { img: 'https://image.isu.pub/240326195802-b2a12b44ef362b23b1684ca814e2445d/jpg/page_1_thumb_large.jpg', label: 'Philippines Waste Game', docId: '200224boardgamehgp' },
   ],
   water: [
-    { docId: '19.6.2020_hgw_water_game.issuu', label: 'HGW Water Game' },
-    { docId: 'issuuhgtsb', label: 'Tanzania Student Book' },
-    { docId: '030924sbvietnam', label: 'Vietnam Student Book' },
-    { docId: 'agvietnam30082024', label: 'Vietnam Activity Guide' },
+    { img: 'https://image.isu.pub/241107155913-594b6739615cc3a01953ad97b7ad48dc/jpg/page_1_thumb_large.jpg', label: 'Tanzania Student Book', docId: 'issuuhgtsb' },
+    { img: 'https://image.isu.pub/241107154947-bf1e5f463bf1098e1ff2a7f9b092b2fe/jpg/page_1_thumb_large.jpg', label: 'Tanzania Activity Guide', docId: '031024aghappygreentanzaniaengels' },
+    { img: 'https://image.isu.pub/200619055200-cf0bd72947dcc96efe96ef8f4b72a7df/jpg/page_1_thumb_large.jpg', label: 'HGW Water Game', docId: '19.6.2020_hgw_water_game.issuu' },
+    { img: 'https://image.isu.pub/241113152958-7312cdd7f4c51bc3673e825cec5ad743/jpg/page_1_thumb_large.jpg', label: 'Vietnam Student Book', docId: '030924sbvietnam' },
   ],
   energy: [
-    { docId: '200224sbhgp', label: 'Philippines Student Book' },
-    { docId: '200224hgpag', label: 'Philippines Activity Guide' },
-    { docId: 'agvietnam30082024', label: 'Vietnam Activity Guide' },
-    { docId: '100821afriquepropreetvert', label: 'Afrique Student Book' },
+    { img: 'https://image.isu.pub/240326202259-c30fc83bec9800a45efb8f4ddfd41a74/jpg/page_1_thumb_large.jpg', label: 'Philippines Student Book', docId: '200224sbhgp' },
+    { img: 'https://image.isu.pub/240326200958-cfe841a37b46d76d96bde4cae985be1a/jpg/page_1_thumb_large.jpg', label: 'Philippines Activity Guide', docId: '200224hgpag' },
+    { img: 'https://image.isu.pub/241113111824-69ec82d9dce708d9346d2fac78b973bd/jpg/page_1_thumb_large.jpg', label: 'Vietnam Activity Guide', docId: 'agvietnam30082024' },
+    { img: 'https://image.isu.pub/230213155024-a3104178e983ddea46e0da56fa04ab2b/jpg/page_1_thumb_large.jpg', label: 'Afrique Student Book', docId: '100821afriquepropreetvert' },
   ],
 };
 ---
@@ -135,28 +135,42 @@ const programmeCovers: Record<string, { docId: string; label: string }[]> = {
               {covers.length > 0 && (
                 <div style={`border-top: 1px solid var(--color-border); padding-top: 1.25rem;`}>
                   <p style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin: 0 0 0.75rem;">
-                    Programme Materials
+                    {programme.data.slug === 'energy' ? 'Coming Soon' : 'Programme Materials'}
                   </p>
-                  <div style="display: flex; gap: 0.625rem; flex-wrap: wrap;">
-                    {covers.map(({ docId, label }) => (
-                      <a
-                        href={`https://issuu.com/happygreenworld/docs/${docId}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title={label}
-                        style="display: block; border-radius: 6px; overflow: hidden; border: 1px solid var(--color-border); flex-shrink: 0; transition: transform 0.2s, box-shadow 0.2s;"
-                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.12)'"
-                        onmouseout="this.style.transform=''; this.style.boxShadow=''"
-                      >
-                        <img
-                          src={`https://image.isu.pub/${docId}/jpg/page_1_thumb_large.jpg`}
-                          alt={label}
-                          loading="lazy"
-                          style="height: 72px; width: auto; display: block;"
-                        />
-                      </a>
-                    ))}
-                  </div>
+                  {programme.data.slug === 'energy' ? (
+                    <div style="position: relative; display: inline-flex; gap: 0.625rem;">
+                      {covers.map(({ img, label }) => (
+                        <div style="border-radius: 6px; overflow: hidden; border: 1px solid var(--color-border); flex-shrink: 0;">
+                          <img src={img} alt={label} loading="lazy" style="height: 72px; width: auto; display: block; filter: blur(3px) brightness(0.55);" />
+                        </div>
+                      ))}
+                      <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;">
+                        <span class="pi-cs-badge" style="font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #FFD166; line-height: 1;">Coming Soon</span>
+                        <span class="pi-cs-dots" style="font-size: 0.875rem; color: rgba(255,209,102,0.7);">•••</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div style="display: flex; gap: 0.625rem; flex-wrap: wrap;">
+                      {covers.map(({ img, label, docId }) => (
+                        <a
+                          href={`https://issuu.com/happygreenworld/docs/${docId}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title={label}
+                          style="display: block; border-radius: 6px; overflow: hidden; border: 1px solid var(--color-border); flex-shrink: 0; transition: transform 0.2s, box-shadow 0.2s;"
+                          onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.12)'"
+                          onmouseout="this.style.transform=''; this.style.boxShadow=''"
+                        >
+                          <img
+                            src={img}
+                            alt={label}
+                            loading="lazy"
+                            style="height: 72px; width: auto; display: block;"
+                          />
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
             </article>
@@ -203,5 +217,16 @@ const programmeCovers: Record<string, { docId: string; label: string }[]> = {
       gap: 1.25rem !important;
     }
   }
+
+  @keyframes pi-cs-glow {
+    0%, 100% { opacity: 1; text-shadow: 0 0 6px rgba(255,209,102,0.7); }
+    50% { opacity: 0.6; text-shadow: 0 0 14px rgba(255,209,102,1); }
+  }
+  @keyframes pi-cs-bounce {
+    0%, 100% { letter-spacing: 0.1em; }
+    50% { letter-spacing: 0.3em; }
+  }
+  .pi-cs-badge { animation: pi-cs-glow 1.8s ease-in-out infinite; }
+  .pi-cs-dots { animation: pi-cs-bounce 1.4s ease-in-out infinite; }
 </style>
 
