@@ -58,6 +58,34 @@ const hgwData = [
       <p style="color: rgba(255,255,255,0.4); font-size: 0.8125rem; margin: 0;">Loading globe…</p>
     </div>
 
+    <!-- Country card popup (shown on hover) -->
+    <div id="home-country-card" style="
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 220px;
+      background: rgba(249,247,242,0.97);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(10px) scale(0.96);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 20;
+    ">
+      <div id="home-card-img-wrap" style="width: 100%; height: 120px; overflow: hidden; background: #1e4d38;">
+        <img id="home-card-img" src="" alt="" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
+        <div id="home-card-fallback" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+      </div>
+      <div style="padding: 0.75rem 1rem 0.875rem;">
+        <div id="home-card-country" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9375rem; font-weight: 700; color: #1A2E1A; margin-bottom: 0.2rem;"></div>
+        <div id="home-card-partner" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; color: #6B7B6B; line-height: 1.4;"></div>
+      </div>
+    </div>
+
     <!-- Stats beneath the globe -->
     <div style="max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 3rem;">
       <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center;" class="home-stats-grid">
@@ -99,29 +127,28 @@ const hgwData = [
 </style>
 
 <script is:inline>
-// Shared country data (same as Our Partners page, Ghana removed)
 const HGW_HOME = {
-  '818': { name: 'Egypt',             partner: 'El Kalema' },
-  '834': { name: 'Tanzania',          partner: '' },
-  '120': { name: 'Cameroon',          partner: 'Main de Rêve & Bénévoles Océan' },
-  '180': { name: 'DR Congo',          partner: 'REC ASBL' },
-  '686': { name: 'Senegal',           partner: 'Casades' },
-  '231': { name: 'Ethiopia',          partner: 'DMA / El Gasha' },
-  '072': { name: 'Botswana',          partner: '' },
-  '108': { name: 'Burundi',           partner: '' },
-  '768': { name: 'Togo',              partner: '' },
-  '854': { name: 'Burkina Faso',      partner: '' },
-  '178': { name: 'Republic of Congo', partner: '' },
-  '324': { name: 'Guinea',            partner: '' },
-  '204': { name: 'Benin',             partner: '' },
-  '562': { name: 'Niger',             partner: '' },
-  '694': { name: 'Sierra Leone',      partner: 'COMIN-SL' },
-  '360': { name: 'Indonesia',         partner: 'Indonesian Waste Platform' },
-  '764': { name: 'Thailand',          partner: 'British International School of Phuket' },
-  '036': { name: 'Australia',         partner: '' },
-  '528': { name: 'Netherlands',       partner: '' },
-  '604': { name: 'Peru',              partner: '' },
-  '218': { name: 'Ecuador',           partner: '' },
+  '818': { name: 'Egypt',             partner: 'El Kalema',                              image: null },
+  '834': { name: 'Tanzania',          partner: '',                                        image: '/images/country-tanzania-children.jpg' },
+  '120': { name: 'Cameroon',          partner: 'Main de Rêve & Bénévoles Océan',         image: '/images/about-cameroon.jpg' },
+  '180': { name: 'DR Congo',          partner: 'REC ASBL',                               image: null },
+  '686': { name: 'Senegal',           partner: 'Casades',                                image: null },
+  '231': { name: 'Ethiopia',          partner: 'DMA / El Gasha',                         image: null },
+  '072': { name: 'Botswana',          partner: '',                                        image: null },
+  '108': { name: 'Burundi',           partner: '',                                        image: null },
+  '768': { name: 'Togo',              partner: '',                                        image: null },
+  '854': { name: 'Burkina Faso',      partner: '',                                        image: null },
+  '178': { name: 'Republic of Congo', partner: '',                                        image: null },
+  '324': { name: 'Guinea',            partner: '',                                        image: null },
+  '204': { name: 'Benin',             partner: '',                                        image: null },
+  '562': { name: 'Niger',             partner: '',                                        image: null },
+  '694': { name: 'Sierra Leone',      partner: 'COMIN-SL',                               image: null },
+  '360': { name: 'Indonesia',         partner: 'Indonesian Waste Platform',               image: '/images/about-indonesia-reading.jpg' },
+  '764': { name: 'Thailand',          partner: 'British International School of Phuket', image: '/images/country-thailand-programme.jpg' },
+  '036': { name: 'Australia',         partner: '',                                        image: '/images/about-australia.jpg' },
+  '528': { name: 'Netherlands',       partner: '',                                        image: null },
+  '604': { name: 'Peru',              partner: '',                                        image: null },
+  '218': { name: 'Ecuador',           partner: '',                                        image: null },
 };
 
 const GREEN_H      = 'rgba(45, 106, 79, 0.78)';
@@ -134,6 +161,36 @@ let globeH   = null;
 function capH(f)  { const n = String(f.id); return HGW_HOME[n] ? (n === hoveredH ? AMBER_H : GREEN_H) : NONE_H; }
 function sideH(f) { return HGW_HOME[String(f.id)] ? GREEN_SIDE_H : NONE_H; }
 function altH(f)  { const n = String(f.id); return HGW_HOME[n] ? (n === hoveredH ? 0.016 : 0.006) : 0; }
+
+function showCardH(data) {
+  const card    = document.getElementById('home-country-card');
+  const imgEl   = document.getElementById('home-card-img');
+  const fallEl  = document.getElementById('home-card-fallback');
+  const nameEl  = document.getElementById('home-card-country');
+  const partEl  = document.getElementById('home-card-partner');
+
+  nameEl.textContent = data.name;
+  partEl.textContent = data.partner || 'Happy Green World programme';
+
+  if (data.image) {
+    imgEl.src = data.image;
+    imgEl.alt = 'Happy Green World in ' + data.name;
+    imgEl.style.display = 'block';
+    if (fallEl) fallEl.style.display = 'none';
+  } else {
+    imgEl.style.display = 'none';
+    if (fallEl) fallEl.style.display = 'flex';
+  }
+
+  card.style.opacity   = '1';
+  card.style.transform = 'translateY(0) scale(1)';
+}
+
+function hideCardH() {
+  const card = document.getElementById('home-country-card');
+  card.style.opacity   = '0';
+  card.style.transform = 'translateY(10px) scale(0.96)';
+}
 
 async function initHomeGlobe() {
   const el = document.getElementById('home-globe-el');
@@ -159,16 +216,14 @@ async function initHomeGlobe() {
     .polygonSideColor(sideH)
     .polygonStrokeColor(f => HGW_HOME[String(f.id)] ? 'rgba(255,255,255,0.3)' : NONE_H)
     .polygonAltitude(altH)
-    .polygonLabel(f => {
-      const d = HGW_HOME[String(f.id)];
-      if (!d) return null;
-      return `<div style="background:rgba(249,247,242,0.97);padding:0.5rem 0.75rem;border-radius:8px;font-family:sans-serif;font-size:13px;font-weight:600;color:#1A2E1A;box-shadow:0 4px 16px rgba(0,0,0,0.35);">${d.name}${d.partner ? `<br><span style="font-size:11px;font-weight:400;color:#6B7B6B;">${d.partner}</span>` : ''}</div>`;
-    })
+    .polygonLabel(() => null)
     .onPolygonHover(f => {
       const n = f ? String(f.id) : null;
       hoveredH = (f && HGW_HOME[n]) ? n : null;
       el.style.cursor = hoveredH ? 'pointer' : 'grab';
       globeH.polygonCapColor(capH).polygonSideColor(sideH).polygonAltitude(altH);
+      if (hoveredH) showCardH(HGW_HOME[hoveredH]);
+      else          hideCardH();
     });
 
   const ctrl = globeH.controls();
