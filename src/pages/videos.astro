@@ -1,0 +1,133 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const videos = [
+  {
+    title: 'Towards a Happy Green World',
+    description: 'An introduction to the Happy Green World Foundation — our mission, our work, and the children we serve across four continents.',
+    youtubeId: 'A5K4K0ylqpM',
+    country: 'Global',
+  },
+  {
+    title: 'The Clean and Green Senegal Lesson',
+    description: 'See our environmental education programme in action in Senegal, delivered by our local partner Casades.',
+    youtubeId: 'DbJ2nEyLKYQ',
+    country: 'Senegal',
+  },
+  {
+    title: 'Green Indonesia Recycling Education Programme',
+    description: 'The Indonesian Waste Platform delivers Happy Green World\'s recycling curriculum to children across Indonesia.',
+    youtubeId: '1rWNz1RBd9U',
+    country: 'Indonesia',
+  },
+];
+---
+
+<PageLayout
+  title="Videos"
+  description="Watch Happy Green World's environmental education programmes in action — from Senegal to Indonesia to global introductions."
+>
+  <!-- Hero -->
+  <section style="background: linear-gradient(135deg, #2D6A4F 0%, #1e4d38 100%); padding: 5rem 1.5rem; color: #fff;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+      <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
+        <a href="/" style="font-size: 0.875rem; color: rgba(255,255,255,0.65); text-decoration: none;">Home</a>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.4); margin: 0 0.5rem;">/</span>
+        <span style="font-size: 0.875rem; color: rgba(255,255,255,0.9);">Videos</span>
+      </nav>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff; margin: 0 0 1rem;">
+        See Our Work in Action
+      </h1>
+      <p style="font-size: 1.125rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0; max-width: 580px; margin-left: auto; margin-right: auto;">
+        Watch how Happy Green World's environmental education reaches children across Africa, Asia, and beyond — through local partners who know their communities best.
+      </p>
+    </div>
+  </section>
+
+  <!-- Videos -->
+  <section style="padding: 5rem 1.5rem; background: var(--color-bg);">
+    <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 4rem;">
+      {videos.map(({ title, description, youtubeId, country }, i) => (
+        <article style={`
+          display: grid;
+          grid-template-columns: ${i % 2 === 0 ? '1fr 1fr' : '1fr 1fr'};
+          gap: 3rem;
+          align-items: center;
+          direction: ${i % 2 === 0 ? 'ltr' : 'rtl'};
+        `} class="video-row">
+          <!-- Video embed -->
+          <div style="border-radius: 14px; overflow: hidden; aspect-ratio: 16/9; background: #000; direction: ltr;">
+            <iframe
+              src={`https://www.youtube.com/embed/${youtubeId}`}
+              title={title}
+              width="100%"
+              height="100%"
+              style="width: 100%; height: 100%; display: block; border: 0;"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <!-- Text -->
+          <div style="direction: ltr;">
+            <span style="
+              display: inline-block;
+              padding: 0.25rem 0.75rem;
+              background: rgba(45, 106, 79, 0.1);
+              color: var(--color-primary);
+              font-size: 0.8125rem;
+              font-weight: 600;
+              border-radius: 99px;
+              margin-bottom: 1rem;
+            ">{country}</span>
+            <h2 style="font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 700; color: var(--color-text); margin: 0 0 0.875rem; line-height: 1.2;">
+              {title}
+            </h2>
+            <p style="font-size: 1.0625rem; color: var(--color-text-muted); line-height: 1.7; margin: 0;">
+              {description}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 5rem 1.5rem; background: var(--color-primary); text-align: center;">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: #fff; margin: 0 0 0.875rem;">
+        Want to bring this to your community?
+      </h2>
+      <p style="font-size: 1.0625rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin: 0 0 2rem;">
+        Join our global network of 42 partners in 26 countries. We localise the materials — you deliver the impact.
+      </p>
+      <a
+        href="/partner-with-us"
+        style="
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.875rem 2rem;
+          background: var(--color-accent);
+          color: var(--color-text);
+          font-size: 1rem;
+          font-weight: 700;
+          text-decoration: none;
+          border-radius: 10px;
+        "
+      >
+        Partner With Us →
+      </a>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  @media (max-width: 768px) {
+    .video-row {
+      grid-template-columns: 1fr !important;
+      direction: ltr !important;
+      gap: 1.5rem !important;
+    }
+  }
+</style>
