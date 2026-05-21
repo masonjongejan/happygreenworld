@@ -59,32 +59,32 @@ const hgwData = [
         <p style="color: rgba(255,255,255,0.4); font-size: 0.8125rem; margin: 0;">Loading globe…</p>
       </div>
 
-      <!-- Country card popup (shown on hover) -->
-      <div id="home-country-card" style="
-        position: absolute;
-        bottom: 2rem;
-        right: 2rem;
-        width: 220px;
-        background: rgba(249,247,242,0.97);
-        border-radius: 14px;
-        overflow: hidden;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-        pointer-events: none;
-        opacity: 0;
-        transform: translateY(10px) scale(0.96);
-        transition: opacity 0.2s ease, transform 0.2s ease;
-        z-index: 20;
-      ">
-        <div style="width: 100%; height: 120px; overflow: hidden; background: #1e4d38;">
-          <img id="home-card-img" src="" alt="" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
-          <div id="home-card-fallback" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
+    </div>
+
+    <!-- Country card tooltip (fixed, follows mouse) -->
+    <div id="home-country-card" style="
+      position: fixed;
+      top: 0; left: 0;
+      width: 220px;
+      background: rgba(249,247,242,0.97);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      transform: scale(0.95);
+      z-index: 9999;
+    ">
+      <div style="width: 100%; height: 120px; overflow: hidden; background: #1e4d38;">
+        <img id="home-card-img" src="" alt="" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
+        <div id="home-card-fallback" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         </div>
-        <div style="padding: 0.75rem 1rem 0.875rem;">
-          <div id="home-card-country" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9375rem; font-weight: 700; color: #1A2E1A; margin-bottom: 0.2rem;"></div>
-          <div id="home-card-partner" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; color: #6B7B6B; line-height: 1.4;"></div>
-        </div>
+      </div>
+      <div style="padding: 0.75rem 1rem 0.875rem;">
+        <div id="home-card-country" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9375rem; font-weight: 700; color: #1A2E1A; margin-bottom: 0.2rem;"></div>
+        <div id="home-card-partner" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; color: #6B7B6B; line-height: 1.4;"></div>
       </div>
     </div>
 
@@ -164,7 +164,25 @@ function capH(f)  { const n = String(f.id); return HGW_HOME[n] ? (n === hoveredH
 function sideH(f) { return HGW_HOME[String(f.id)] ? GREEN_SIDE_H : NONE_H; }
 function altH(f)  { const n = String(f.id); return HGW_HOME[n] ? (n === hoveredH ? 0.016 : 0.006) : 0; }
 
-function showCardH(data) {
+let mouseX = 0, mouseY = 0;
+
+function moveCardH(e) {
+  const card = document.getElementById('home-country-card');
+  if (!card || card.style.opacity === '0') return;
+  const cw = card.offsetWidth  || 220;
+  const ch = card.offsetHeight || 180;
+  const offset = 18;
+  let x = e.clientX + offset;
+  let y = e.clientY - ch / 2;
+  // Keep within viewport
+  if (x + cw > window.innerWidth  - 8) x = e.clientX - cw - offset;
+  if (y < 8)                           y = 8;
+  if (y + ch > window.innerHeight - 8) y = window.innerHeight - ch - 8;
+  card.style.left = x + 'px';
+  card.style.top  = y + 'px';
+}
+
+function showCardH(data, e) {
   const card    = document.getElementById('home-country-card');
   const imgEl   = document.getElementById('home-card-img');
   const fallEl  = document.getElementById('home-card-fallback');
@@ -184,14 +202,15 @@ function showCardH(data) {
     if (fallEl) fallEl.style.display = 'flex';
   }
 
+  if (e) moveCardH(e);
   card.style.opacity   = '1';
-  card.style.transform = 'translateY(0) scale(1)';
+  card.style.transform = 'scale(1)';
 }
 
 function hideCardH() {
   const card = document.getElementById('home-country-card');
   card.style.opacity   = '0';
-  card.style.transform = 'translateY(10px) scale(0.96)';
+  card.style.transform = 'scale(0.95)';
 }
 
 async function initHomeGlobe() {
@@ -206,6 +225,9 @@ async function initHomeGlobe() {
   const features = topojson.feature(world, world.objects.countries).features;
 
   if (loadEl) loadEl.style.display = 'none';
+
+  // Track mouse position so the card can follow
+  el.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; moveCardH(e); });
 
   globeH = Globe({ rendererConfig: { alpha: true, antialias: true } })(el)
     .backgroundColor('rgba(0,0,0,0)')
@@ -224,7 +246,7 @@ async function initHomeGlobe() {
       hoveredH = (f && HGW_HOME[n]) ? n : null;
       el.style.cursor = hoveredH ? 'pointer' : 'grab';
       globeH.polygonCapColor(capH).polygonSideColor(sideH).polygonAltitude(altH);
-      if (hoveredH) showCardH(HGW_HOME[hoveredH]);
+      if (hoveredH) showCardH(HGW_HOME[hoveredH], { clientX: mouseX, clientY: mouseY });
       else          hideCardH();
     });
 
