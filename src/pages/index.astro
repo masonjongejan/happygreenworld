@@ -1,23 +1,188 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import HeroSection from '../components/sections/HeroSection.astro';
-import ImpactBar from '../components/sections/ImpactBar.astro';
 import ProgrammePreviews from '../components/sections/ProgrammePreviews.astro';
 import PhotoStrip from '../components/sections/PhotoStrip.astro';
 import MissionStatement from '../components/sections/MissionStatement.astro';
 import PartnerCallout from '../components/sections/PartnerCallout.astro';
 import DonateCallout from '../components/sections/DonateCallout.astro';
+
+const hgwData = [
+  { num: '818', name: 'Egypt',             region: 'Africa',         partner: 'El Kalema',                              image: null },
+  { num: '834', name: 'Tanzania',          region: 'Africa',         partner: '',                                       image: '/images/country-tanzania-children.jpg' },
+  { num: '120', name: 'Cameroon',          region: 'Africa',         partner: 'Main de Rêve & Bénévoles Océan',         image: '/images/about-cameroon.jpg' },
+  { num: '180', name: 'DR Congo',          region: 'Africa',         partner: 'REC ASBL',                               image: null },
+  { num: '686', name: 'Senegal',           region: 'Africa',         partner: 'Casades',                                image: null },
+  { num: '231', name: 'Ethiopia',          region: 'Africa',         partner: 'DMA / El Gasha',                         image: null },
+  { num: '072', name: 'Botswana',          region: 'Africa',         partner: '',                                       image: null },
+  { num: '108', name: 'Burundi',           region: 'Africa',         partner: '',                                       image: null },
+  { num: '768', name: 'Togo',             region: 'Africa',          partner: '',                                       image: null },
+  { num: '854', name: 'Burkina Faso',      region: 'Africa',         partner: '',                                       image: null },
+  { num: '178', name: 'Republic of Congo', region: 'Africa',         partner: '',                                       image: null },
+  { num: '324', name: 'Guinea',            region: 'Africa',         partner: '',                                       image: null },
+  { num: '204', name: 'Benin',             region: 'Africa',         partner: '',                                       image: null },
+  { num: '562', name: 'Niger',             region: 'Africa',         partner: '',                                       image: null },
+  { num: '694', name: 'Sierra Leone',      region: 'Africa',         partner: 'COMIN-SL',                               image: null },
+  { num: '360', name: 'Indonesia',         region: 'Asia & Oceania', partner: 'Indonesian Waste Platform',              image: '/images/about-indonesia-reading.jpg' },
+  { num: '764', name: 'Thailand',          region: 'Asia & Oceania', partner: 'British International School of Phuket', image: '/images/country-thailand-programme.jpg' },
+  { num: '036', name: 'Australia',         region: 'Asia & Oceania', partner: '',                                       image: '/images/about-australia.jpg' },
+  { num: '528', name: 'Netherlands',       region: 'Europe',         partner: '',                                       image: null },
+  { num: '604', name: 'Peru',             region: 'South America',   partner: '',                                       image: null },
+  { num: '218', name: 'Ecuador',          region: 'South America',   partner: '',                                       image: null },
+];
 ---
 
 <PageLayout
   title="Happy Green World"
-  description="Happy Green World Foundation creates localised environmental education materials for children aged 6–16 worldwide, covering waste, water, and energy — in partnership with schools and NGOs across 12+ countries."
+  description="Happy Green World Foundation creates localised environmental education for children aged 6–16 worldwide — waste, water, and energy literacy through 42 partners in 26 countries."
 >
   <HeroSection />
-  <ImpactBar />
+
+  <!-- Where We Work — Globe + Stats -->
+  <section style="background: #0d1b2a; position: relative; overflow: hidden;">
+    <div style="max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 0; text-align: center;">
+      <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: #fff; margin: 0 0 0.5rem;">
+        Active in 26 countries across 4 continents
+      </h2>
+      <p style="font-size: 1rem; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.6;">
+        Drag to rotate · hover a country to explore
+      </p>
+    </div>
+
+    <!-- Globe mount -->
+    <div id="home-globe-el" style="width: 100%; height: 500px;"></div>
+
+    <!-- Loading spinner -->
+    <div id="home-globe-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; pointer-events: none; z-index: 10;">
+      <div style="width: 36px; height: 36px; border: 3px solid rgba(255,255,255,0.15); border-top-color: #52B788; border-radius: 50%; animation: homeSpin 0.9s linear infinite;"></div>
+      <p style="color: rgba(255,255,255,0.4); font-size: 0.8125rem; margin: 0;">Loading globe…</p>
+    </div>
+
+    <!-- Stats beneath the globe -->
+    <div style="max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 3rem;">
+      <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center;" class="home-stats-grid">
+        {[
+          { value: '26', label: 'Countries' },
+          { value: '42', label: 'Partners' },
+          { value: '50,000+', label: 'Books Printed' },
+          { value: '10', label: 'Languages' },
+        ].map(({ value, label }) => (
+          <li>
+            <div style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; color: var(--color-accent-light); line-height: 1; margin-bottom: 0.3rem;">{value}</div>
+            <div style="font-size: 0.875rem; color: rgba(255,255,255,0.65); font-weight: 500;">{label}</div>
+          </li>
+        ))}
+      </ul>
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="/our-projects" style="display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.9375rem; font-weight: 600; color: var(--color-secondary); text-decoration: none;">
+          Meet all our partners
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <ProgrammePreviews />
   <PhotoStrip />
   <MissionStatement />
   <PartnerCallout />
   <DonateCallout />
 </PageLayout>
+
+<style>
+  @keyframes homeSpin {
+    to { transform: rotate(360deg); }
+  }
+  @media (max-width: 600px) {
+    .home-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+</style>
+
+<script is:inline>
+// Shared country data (same as Our Partners page, Ghana removed)
+const HGW_HOME = {
+  '818': { name: 'Egypt',             partner: 'El Kalema' },
+  '834': { name: 'Tanzania',          partner: '' },
+  '120': { name: 'Cameroon',          partner: 'Main de Rêve & Bénévoles Océan' },
+  '180': { name: 'DR Congo',          partner: 'REC ASBL' },
+  '686': { name: 'Senegal',           partner: 'Casades' },
+  '231': { name: 'Ethiopia',          partner: 'DMA / El Gasha' },
+  '072': { name: 'Botswana',          partner: '' },
+  '108': { name: 'Burundi',           partner: '' },
+  '768': { name: 'Togo',              partner: '' },
+  '854': { name: 'Burkina Faso',      partner: '' },
+  '178': { name: 'Republic of Congo', partner: '' },
+  '324': { name: 'Guinea',            partner: '' },
+  '204': { name: 'Benin',             partner: '' },
+  '562': { name: 'Niger',             partner: '' },
+  '694': { name: 'Sierra Leone',      partner: 'COMIN-SL' },
+  '360': { name: 'Indonesia',         partner: 'Indonesian Waste Platform' },
+  '764': { name: 'Thailand',          partner: 'British International School of Phuket' },
+  '036': { name: 'Australia',         partner: '' },
+  '528': { name: 'Netherlands',       partner: '' },
+  '604': { name: 'Peru',              partner: '' },
+  '218': { name: 'Ecuador',           partner: '' },
+};
+
+const GREEN_H      = 'rgba(45, 106, 79, 0.78)';
+const GREEN_SIDE_H = 'rgba(45, 106, 79, 0.3)';
+const AMBER_H      = 'rgba(244, 162, 97, 0.92)';
+const NONE_H       = 'rgba(255,255,255,0)';
+let hoveredH = null;
+let globeH   = null;
+
+function capH(f)  { const n = String(f.id); return HGW_HOME[n] ? (n === hoveredH ? AMBER_H : GREEN_H) : NONE_H; }
+function sideH(f) { return HGW_HOME[String(f.id)] ? GREEN_SIDE_H : NONE_H; }
+function altH(f)  { const n = String(f.id); return HGW_HOME[n] ? (n === hoveredH ? 0.016 : 0.006) : 0; }
+
+async function initHomeGlobe() {
+  const el = document.getElementById('home-globe-el');
+  const loadEl = document.getElementById('home-globe-loading');
+  if (!el) return;
+
+  await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://unpkg.com/globe.gl@2/dist/globe.gl.min.js'; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
+  await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js'; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
+
+  const world    = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r => r.json());
+  const features = topojson.feature(world, world.objects.countries).features;
+
+  if (loadEl) loadEl.style.display = 'none';
+
+  globeH = Globe({ rendererConfig: { alpha: true, antialias: true } })(el)
+    .backgroundColor('rgba(0,0,0,0)')
+    .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+    .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+    .atmosphereColor('rgba(82, 183, 136, 0.5)')
+    .atmosphereAltitude(0.18)
+    .polygonsData(features)
+    .polygonCapColor(capH)
+    .polygonSideColor(sideH)
+    .polygonStrokeColor(f => HGW_HOME[String(f.id)] ? 'rgba(255,255,255,0.3)' : NONE_H)
+    .polygonAltitude(altH)
+    .polygonLabel(f => {
+      const d = HGW_HOME[String(f.id)];
+      if (!d) return null;
+      return `<div style="background:rgba(249,247,242,0.97);padding:0.5rem 0.75rem;border-radius:8px;font-family:sans-serif;font-size:13px;font-weight:600;color:#1A2E1A;box-shadow:0 4px 16px rgba(0,0,0,0.35);">${d.name}${d.partner ? `<br><span style="font-size:11px;font-weight:400;color:#6B7B6B;">${d.partner}</span>` : ''}</div>`;
+    })
+    .onPolygonHover(f => {
+      const n = f ? String(f.id) : null;
+      hoveredH = (f && HGW_HOME[n]) ? n : null;
+      el.style.cursor = hoveredH ? 'pointer' : 'grab';
+      globeH.polygonCapColor(capH).polygonSideColor(sideH).polygonAltitude(altH);
+    });
+
+  const ctrl = globeH.controls();
+  ctrl.autoRotate = true;
+  ctrl.autoRotateSpeed = 0.4;
+  ctrl.enableDamping = true;
+  ctrl.dampingFactor = 0.08;
+  ctrl.addEventListener('start', () => { ctrl.autoRotate = false; });
+
+  globeH.pointOfView({ lat: 5, lng: 25, altitude: 2.2 }, 0);
+}
+
+initHomeGlobe().catch(() => {
+  const l = document.getElementById('home-globe-loading');
+  if (l) l.style.display = 'none';
+});
+</script>
