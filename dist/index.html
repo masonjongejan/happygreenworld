@@ -776,6 +776,8 @@ async function initHomeGlobe() {
   el.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; moveCardH(e); });
 
   globeH = Globe({ rendererConfig: { alpha: true, antialias: true } })(el)
+    .width(el.offsetWidth)
+    .height(el.offsetHeight)
     .backgroundColor('rgba(0,0,0,0)')
     .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
     .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
@@ -803,7 +805,7 @@ async function initHomeGlobe() {
   ctrl.dampingFactor = 0.08;
   ctrl.addEventListener('start', () => { ctrl.autoRotate = false; });
 
-  globeH.pointOfView({ lat: 5, lng: 25, altitude: 2.2 }, 0);
+  globeH.pointOfView({ lat: 10, lng: 20, altitude: 2.6 }, 0);
 }
 
 initHomeGlobe().catch(() => {
