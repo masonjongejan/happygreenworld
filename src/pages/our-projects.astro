@@ -2,26 +2,29 @@
 import PageLayout from '../layouts/PageLayout.astro';
 
 const hgwData = [
-  { num: '818', name: 'Egypt',              region: 'Africa',          partner: 'El Kalema',                            image: null },
-  { num: '834', name: 'Tanzania',           region: 'Africa',          partner: '',                                     image: '/images/country-tanzania-children.jpg' },
-  { num: '120', name: 'Cameroon',           region: 'Africa',          partner: 'Main de Rêve & Bénévoles Océan',       image: '/images/about-cameroon.jpg' },
-  { num: '180', name: 'DR Congo',           region: 'Africa',          partner: 'REC ASBL',                             image: null },
-  { num: '686', name: 'Senegal',            region: 'Africa',          partner: 'Casades',                              image: null },
-  { num: '231', name: 'Ethiopia',           region: 'Africa',          partner: 'DMA / El Gasha',                       image: null },
-  { num: '072', name: 'Botswana',           region: 'Africa',          partner: '',                                     image: null },
-  { num: '108', name: 'Burundi',            region: 'Africa',          partner: '',                                     image: null },
-  { num: '768', name: 'Togo',              region: 'Africa',           partner: '',                                     image: null },
-  { num: '854', name: 'Burkina Faso',       region: 'Africa',          partner: '',                                     image: null },
-  { num: '178', name: 'Republic of Congo',  region: 'Africa',          partner: '',                                     image: null },
-  { num: '324', name: 'Guinea',             region: 'Africa',          partner: '',                                     image: null },
-  { num: '204', name: 'Benin',              region: 'Africa',          partner: '',                                     image: null },
-  { num: '562', name: 'Niger',              region: 'Africa',          partner: '',                                     image: null },
-  { num: '694', name: 'Sierra Leone',       region: 'Africa',          partner: 'COMIN-SL',                             image: null },
-  { num: '360', name: 'Indonesia',          region: 'Asia & Oceania',  partner: 'Indonesian Waste Platform',            image: '/images/about-indonesia-reading.jpg' },
-  { num: '764', name: 'Thailand',           region: 'Asia & Oceania',  partner: 'British International School of Phuket', image: '/images/country-thailand-programme.jpg' },
-  { num: '036', name: 'Australia',          region: 'Asia & Oceania',  partner: '',                                     image: '/images/about-australia.jpg' },
-  { num: '528', name: 'Netherlands',        region: 'Europe',          partner: '',                                     image: null },
-  { num: '604', name: 'Peru',              region: 'South America',    partner: '',                                     image: null },
+  { num: '818', name: 'Egypt',              flag: '🇪🇬', region: 'Africa',          partner: 'El Kalema',                              image: null },
+  { num: '834', name: 'Tanzania',           flag: '🇹🇿', region: 'Africa',          partner: '',                                       image: '/images/country-tanzania-children.jpg' },
+  { num: '120', name: 'Cameroon',           flag: '🇨🇲', region: 'Africa',          partner: 'Main de Rêve & Bénévoles Océan',         image: '/images/about-cameroon.jpg' },
+  { num: '180', name: 'DR Congo',           flag: '🇨🇩', region: 'Africa',          partner: 'REC ASBL',                               image: null },
+  { num: '686', name: 'Senegal',            flag: '🇸🇳', region: 'Africa',          partner: 'Casades',                                image: null },
+  { num: '231', name: 'Ethiopia',           flag: '🇪🇹', region: 'Africa',          partner: 'DMA / El Gasha',                         image: null },
+  { num: '072', name: 'Botswana',           flag: '🇧🇼', region: 'Africa',          partner: '',                                       image: '/images/booklet-botswana-classroom.png' },
+  { num: '108', name: 'Burundi',            flag: '🇧🇮', region: 'Africa',          partner: '',                                       image: null },
+  { num: '768', name: 'Togo',               flag: '🇹🇬', region: 'Africa',          partner: '',                                       image: null },
+  { num: '854', name: 'Burkina Faso',       flag: '🇧🇫', region: 'Africa',          partner: '',                                       image: null },
+  { num: '178', name: 'Republic of Congo',  flag: '🇨🇬', region: 'Africa',          partner: '',                                       image: null },
+  { num: '324', name: 'Guinea',             flag: '🇬🇳', region: 'Africa',          partner: '',                                       image: null },
+  { num: '204', name: 'Benin',              flag: '🇧🇯', region: 'Africa',          partner: '',                                       image: null },
+  { num: '562', name: 'Niger',              flag: '🇳🇪', region: 'Africa',          partner: '',                                       image: null },
+  { num: '694', name: 'Sierra Leone',       flag: '🇸🇱', region: 'Africa',          partner: 'COMIN-SL',                               image: null },
+  { num: '116', name: 'Cambodia',           flag: '🇰🇭', region: 'Asia & Oceania',  partner: '',                                       image: '/images/582934486_1253714070115792_3807190380704731451_n.jpg' },
+  { num: '356', name: 'India',              flag: '🇮🇳', region: 'Asia & Oceania',  partner: '',                                       image: '/images/571208808_1235788555241677_5925644652365628698_n.jpg' },
+  { num: '360', name: 'Indonesia',          flag: '🇮🇩', region: 'Asia & Oceania',  partner: 'Indonesian Waste Platform',               image: '/images/about-indonesia-reading.jpg' },
+  { num: '764', name: 'Thailand',           flag: '🇹🇭', region: 'Asia & Oceania',  partner: 'British International School of Phuket', image: '/images/country-thailand-programme.jpg' },
+  { num: '036', name: 'Australia',          flag: '🇦🇺', region: 'Asia & Oceania',  partner: '',                                       image: '/images/about-australia.jpg' },
+  { num: '528', name: 'Netherlands',        flag: '🇳🇱', region: 'Europe',          partner: '',                                       image: '/images/about-perth-2.jpg' },
+  { num: '604', name: 'Peru',               flag: '🇵🇪', region: 'South America',   partner: '',                                       image: null },
+  { num: '218', name: 'Ecuador',            flag: '🇪🇨', region: 'South America',   partner: '',                                       image: null },
 ];
 
 const regions = ['Africa', 'Asia & Oceania', 'Europe', 'South America'];
@@ -122,9 +125,9 @@ const regions = ['Africa', 'Asia & Oceania', 'Europe', 'South America'];
                 {region}
               </h3>
               <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
-                {countries.map(({ name, partner }) => (
+                {countries.map(({ name, partner, flag }) => (
                   <li style="display: flex; align-items: flex-start; gap: 0.625rem;">
-                    <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-secondary); flex-shrink: 0; margin-top: 0.45rem;"></span>
+                    <span style="font-size: 1rem; flex-shrink: 0; line-height: 1.45;" aria-hidden="true">{flag}</span>
                     <span>
                       <span style="font-size: 0.9375rem; font-weight: 600; color: var(--color-text);">{name}</span>
                       {partner && <span style="font-size: 0.8125rem; color: var(--color-text-muted);"> — {partner}</span>}
