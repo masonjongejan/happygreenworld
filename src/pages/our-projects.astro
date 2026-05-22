@@ -28,6 +28,13 @@ const hgwData = [
 ];
 
 const regions = ['Africa', 'Asia & Oceania', 'Europe', 'South America'];
+
+const regionGlobe: Record<string, string> = {
+  'Africa':          '🌍',
+  'Asia & Oceania':  '🌏',
+  'Europe':          '🌍',
+  'South America':   '🌎',
+};
 ---
 
 <PageLayout
@@ -121,7 +128,7 @@ const regions = ['Africa', 'Asia & Oceania', 'Europe', 'South America'];
                 align-items: center;
                 gap: 0.5rem;
               ">
-                <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-primary); flex-shrink: 0; display: inline-block;"></span>
+                <span style="font-size: 1.25rem; line-height: 1; flex-shrink: 0;" aria-hidden="true">{regionGlobe[region]}</span>
                 {region}
               </h3>
               <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
