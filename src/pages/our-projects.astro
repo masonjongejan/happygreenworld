@@ -29,11 +29,15 @@ const hgwData = [
 
 const regions = ['Africa', 'Asia & Oceania', 'Europe', 'South America'];
 
-const regionGlobe: Record<string, string> = {
-  'Africa':          '🌍',
-  'Asia & Oceania':  '🌏',
-  'Europe':          '🌍',
-  'South America':   '🌎',
+const regionGlobeSvg: Record<string, string> = {
+  // Africa centered — wide blob tapering to southern point
+  'Africa': `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#e8f4ee" stroke="#2D6A4F" stroke-width="1.2"/><line x1="2" y1="12" x2="22" y2="12" stroke="#2D6A4F" stroke-width="0.4" opacity="0.4"/><ellipse cx="12" cy="12" rx="5" ry="10" fill="none" stroke="#2D6A4F" stroke-width="0.4" opacity="0.4"/><path d="M10,5 L14,5 L16,8 L15,13 L13,19 L11,18 L9,13 L9,8 Z" fill="#2D6A4F"/></svg>`,
+  // Europe centered at top of globe — irregular blob with Scandinavian suggestion
+  'Europe': `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#e8f4ee" stroke="#2D6A4F" stroke-width="1.2"/><line x1="2" y1="12" x2="22" y2="12" stroke="#2D6A4F" stroke-width="0.4" opacity="0.4"/><ellipse cx="12" cy="12" rx="5" ry="10" fill="none" stroke="#2D6A4F" stroke-width="0.4" opacity="0.4"/><path d="M10,4 L12,3 L14,4 L16,6 L15,8 L13,9 L14,10 L12,10 L10,9 L8,7 L9,5 Z" fill="#2D6A4F"/></svg>`,
+  // Asia & Oceania — faint Asia at top, Australia prominent in the lower centre
+  'Asia & Oceania': `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#e8f4ee" stroke="#2D6A4F" stroke-width="1.2"/><line x1="2" y1="12" x2="22" y2="12" stroke="#2D6A4F" stroke-width="0.4" opacity="0.4"/><ellipse cx="12" cy="12" rx="5" ry="10" fill="none" stroke="#2D6A4F" stroke-width="0.4" opacity="0.4"/><path d="M7,5 L15,4 L16,7 L14,9 L10,9 L7,7 Z" fill="#2D6A4F" opacity="0.45"/><path d="M8,13 L15,13 L16,15 L15,18 L11,19 L8,17 L7,15 Z" fill="#2D6A4F"/></svg>`,
+  // South America centered — tapered blob pointing south
+  'South America': `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#e8f4ee" stroke="#2D6A4F" stroke-width="1.2"/><line x1="2" y1="12" x2="22" y2="12" stroke="#2D6A4F" stroke-width="0.4" opacity="0.4"/><ellipse cx="12" cy="12" rx="5" ry="10" fill="none" stroke="#2D6A4F" stroke-width="0.4" opacity="0.4"/><path d="M10,5 L14,5 L15,8 L14,12 L12,17 L10,19 L9,16 L8,12 L9,7 Z" fill="#2D6A4F"/></svg>`,
 };
 ---
 
@@ -128,7 +132,7 @@ const regionGlobe: Record<string, string> = {
                 align-items: center;
                 gap: 0.5rem;
               ">
-                <span style="font-size: 1.25rem; line-height: 1; flex-shrink: 0;" aria-hidden="true">{regionGlobe[region]}</span>
+                <span set:html={regionGlobeSvg[region]} style="flex-shrink: 0; line-height: 0; display: inline-flex;"></span>
                 {region}
               </h3>
               <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
