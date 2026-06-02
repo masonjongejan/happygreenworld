@@ -94,8 +94,8 @@ const hgwData = [
         {[
           { value: '26', label: 'Countries' },
           { value: '42', label: 'Partners' },
-          { value: '50,000+', label: 'Books Printed' },
           { value: '10', label: 'Languages' },
+          { value: '4', label: 'Continents' },
         ].map(({ value, label }) => (
           <li>
             <div style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; color: var(--color-accent-light); line-height: 1; margin-bottom: 0.3rem;">{value}</div>
@@ -104,7 +104,7 @@ const hgwData = [
         ))}
       </ul>
       <div style="text-align: center; margin-top: 2rem;">
-        <a href="/our-projects" style="display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.9375rem; font-weight: 600; color: var(--color-secondary); text-decoration: none;">
+        <a href="/partner-with-us" style="display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.9375rem; font-weight: 600; color: var(--color-secondary); text-decoration: none;">
           Meet all our partners
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
         </a>
@@ -112,9 +112,90 @@ const hgwData = [
     </div>
   </section>
 
+  <!-- Our Mission — Who / What / Why / How -->
+  <section style="padding: 5rem 1.5rem; background: var(--color-bg);">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--color-text); margin: 0 0 0.75rem;">
+          Our Mission
+        </h2>
+        <p style="font-size: 1.0625rem; color: var(--color-text-muted); max-width: 540px; margin: 0 auto; line-height: 1.65;">
+          Environmental education, customised for every community.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;" class="mission-grid">
+        <!-- Who -->
+        <div data-animate style="border-radius: 16px; overflow: hidden; border: 2px solid #e53e3e; background: #fff;">
+          <div style="background: #e53e3e; padding: 0.625rem 1.25rem;">
+            <span style="font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; color: #fff; font-style: italic;">Who</span>
+          </div>
+          <div style="padding: 1.5rem 1.25rem;">
+            <p style="font-size: 0.9375rem; color: var(--color-text); line-height: 1.7; margin: 0;">
+              The Happy Green World Foundation develops educational programs regarding waste, water and energy with the aim to encourage sustainable behaviour in children aged 4 to 16 years old.
+            </p>
+          </div>
+        </div>
+
+        <!-- What -->
+        <div data-animate style="border-radius: 16px; overflow: hidden; border: 2px solid #2D6A4F; background: #fff;">
+          <div style="background: #2D6A4F; padding: 0.625rem 1.25rem;">
+            <span style="font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; color: #fff; font-style: italic;">What</span>
+          </div>
+          <div style="padding: 1.5rem 1.25rem;">
+            <p style="font-size: 0.9375rem; color: var(--color-text); line-height: 1.7; margin: 0;">
+              Our quality educational programs consist of practical and playful activity guides, student books and games. The educational materials are custom made regarding illustrations, translation and content adapting to the partner's country, culture, language and customs.
+            </p>
+          </div>
+        </div>
+
+        <!-- Why -->
+        <div data-animate style="border-radius: 16px; overflow: hidden; border: 2px solid #3182ce; background: #fff;">
+          <div style="background: #3182ce; padding: 0.625rem 1.25rem;">
+            <span style="font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; color: #fff; font-style: italic;">Why</span>
+          </div>
+          <div style="padding: 1.5rem 1.25rem;">
+            <p style="font-size: 0.9375rem; color: var(--color-text); line-height: 1.7; margin: 0;">
+              Our goal is to offer environmental education in the curriculum of countries all over the world. Happy Green World is convinced that children who learn sustainable behaviour at a young age, will become adults who actively contribute to a cleaner and healthier living environment: a Happy Green World!
+            </p>
+          </div>
+        </div>
+
+        <!-- How -->
+        <div data-animate style="border-radius: 16px; overflow: hidden; border: 2px solid #d69e2e; background: #fff;">
+          <div style="background: #d69e2e; padding: 0.625rem 1.25rem;">
+            <span style="font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; color: #fff; font-style: italic;">How</span>
+          </div>
+          <div style="padding: 1.5rem 1.25rem;">
+            <p style="font-size: 0.9375rem; color: var(--color-text); line-height: 1.7; margin: 0;">
+              Partner with us and teach environmental education in your local communities! Send us an email and we'll guide you through a successful project. In order to fund the development and printing of the program, we encourage the partner to find a local sponsor. Logos of partners and sponsors can be displayed on the educational materials.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA buttons -->
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
+        <a
+          href="/videos"
+          style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.75rem; background: var(--color-primary); color: #fff; font-size: 1rem; font-weight: 600; text-decoration: none; border-radius: 10px;"
+        >
+          See Our Videos
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+        <a
+          href="/partner-with-us"
+          style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.75rem; background: transparent; color: var(--color-primary); font-size: 1rem; font-weight: 600; text-decoration: none; border-radius: 10px; border: 2px solid var(--color-primary);"
+        >
+          Partner With Us
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <ProgrammePreviews />
   <PhotoStrip />
-  <MissionStatement />
   <PartnerCallout />
   <DonateCallout />
 </PageLayout>
@@ -125,6 +206,7 @@ const hgwData = [
   }
   @media (max-width: 600px) {
     .home-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .mission-grid { grid-template-columns: 1fr !important; }
   }
 </style>
 

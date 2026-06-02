@@ -1,10 +1,44 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+
+const regions = [
+  {
+    name: 'Africa',
+    countries: [
+      'Egypt', 'Tanzania', 'Cameroon', 'DR Congo', 'Senegal', 'Ethiopia',
+      'Botswana', 'Burundi', 'Togo', 'Burkina Faso', 'Republic of Congo',
+      'Guinea', 'Benin', 'Niger', 'Sierra Leone',
+    ],
+  },
+  {
+    name: 'Asia & Oceania',
+    countries: ['Cambodia', 'India', 'Indonesia', 'Thailand', 'Australia'],
+  },
+  {
+    name: 'Europe',
+    countries: ['Netherlands'],
+  },
+  {
+    name: 'South America',
+    countries: ['Peru', 'Ecuador'],
+  },
+];
+
+const namedPartners = [
+  { name: 'El Kalema', country: 'Egypt', url: null },
+  { name: 'Main de Rêve & Bénévoles Océan', country: 'Cameroon', url: null },
+  { name: 'REC ASBL', country: 'DR Congo', url: null },
+  { name: 'Casades', country: 'Senegal', url: null },
+  { name: 'DMA / El Gasha', country: 'Ethiopia', url: null },
+  { name: 'COMIN-SL', country: 'Sierra Leone', url: null },
+  { name: 'Indonesian Waste Platform', country: 'Indonesia', url: null },
+  { name: 'British International School of Phuket', country: 'Thailand', url: 'https://www.headstart-international.com/' },
+];
 ---
 
 <PageLayout
   title="Partner With Us"
-  description="Bring Happy Green World's environmental education curriculum to your school, NGO, foundation, or corporate programme. We localise and support — you distribute. Tell us about your community."
+  description="Bring Happy Green World's environmental education curriculum to your school, NGO, foundation, or corporate programme. Join 42 partners in 26 countries working towards a Happy Green World."
 >
   <!-- Hero -->
   <section style="
@@ -75,6 +109,33 @@ import PageLayout from '../layouts/PageLayout.astro';
     </div>
   </section>
 
+  <!-- Why collaborate? -->
+  <section style="padding: 5rem 1.5rem; background: var(--color-surface); border-bottom: 1px solid var(--color-border);">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--color-text); margin: 0 0 1rem;">
+          Why collaborate?
+        </h2>
+        <p style="font-size: 1.0625rem; color: var(--color-text-muted); line-height: 1.7; max-width: 680px; margin: 0 auto;">
+          Every country deserves a clean and green future. Happy Green World believes that environmental education is the foundation — and that the most effective programmes are built together with local partners who know their communities best.
+        </p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" class="why-grid">
+        {[
+          { icon: '🌍', title: 'Local knowledge, global impact', desc: 'You understand your community. We bring the curriculum. Together, the programme is relevant, trusted, and effective.' },
+          { icon: '📚', title: 'Ready-made, localised materials', desc: 'Our activity guides, student books, and games are adapted to your language, culture, and context — so children actually relate to them.' },
+          { icon: '🤝', title: 'A network of like-minded partners', desc: 'Joining HGW means joining a global community of organisations working towards the same goal. We encourage our partners to connect and collaborate with each other.' },
+        ].map(({ icon, title, desc }) => (
+          <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 16px; padding: 2rem; text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 0.875rem;" aria-hidden="true">{icon}</div>
+            <h3 style="font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.625rem;">{title}</h3>
+            <p style="font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Who we work with -->
   <section style="padding: 5rem 1.5rem; background: var(--color-bg);">
     <div style="max-width: 1100px; margin: 0 auto;">
@@ -107,36 +168,14 @@ import PageLayout from '../layouts/PageLayout.astro';
           {
             icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
             title: 'Corporate Sponsors & CSR Programmes',
-            description: 'Fund the localisation of our materials for a new country or language as part of your CSR programme. Your organisation\'s logo can appear on all distributed materials.',
+            description: "Fund the localisation of our materials for a new country or language as part of your CSR programme. Your organisation's logo can appear on all distributed materials.",
           },
         ].map(({ icon, title, description }) => (
-          <article style="
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 16px;
-            padding: 2rem;
-            display: flex;
-            gap: 1.25rem;
-            align-items: flex-start;
-          ">
-            <div style="
-              width: 48px;
-              height: 48px;
-              border-radius: 12px;
-              background: rgba(45, 106, 79, 0.1);
-              color: var(--color-primary);
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              flex-shrink: 0;
-            " set:html={icon} />
+          <article style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; padding: 2rem; display: flex; gap: 1.25rem; align-items: flex-start;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(45, 106, 79, 0.1); color: var(--color-primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;" set:html={icon} />
             <div>
-              <h3 style="font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.5rem;">
-                {title}
-              </h3>
-              <p style="font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">
-                {description}
-              </p>
+              <h3 style="font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.5rem;">{title}</h3>
+              <p style="font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">{description}</p>
             </div>
           </article>
         ))}
@@ -156,61 +195,25 @@ import PageLayout from '../layouts/PageLayout.astro';
         </p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; position: relative;" class="steps-grid">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;" class="steps-grid">
         {[
-          {
-            num: 1,
-            title: 'Tell us about your context',
-            desc: 'Fill in our short inquiry form. We want to understand your organisation, the children you work with, and the environmental challenges in your community.',
-          },
-          {
-            num: 2,
-            title: 'We have a conversation',
-            desc: 'Our team responds as soon as possible. We\'ll explore together how our materials can be adapted for your country and community, and agree on a plan.',
-          },
-          {
-            num: 3,
-            title: 'Launch together',
-            desc: 'We handle the localisation and adaptation of materials. You handle distribution to schools and children. Together, we create impact.',
-          },
-        ].map(({ num, title, desc }, i) => (
-          <div style="
-            background: var(--color-bg);
-            border: 1px solid var(--color-border);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-          ">
-            <div style="
-              width: 48px;
-              height: 48px;
-              border-radius: 50%;
-              background: var(--color-primary);
-              color: #fff;
-              font-family: var(--font-display);
-              font-size: 1.25rem;
-              font-weight: 700;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              margin: 0 auto 1.25rem;
-            ">
+          { num: 1, title: 'Tell us about your context', desc: "Fill in our short inquiry form. We want to understand your organisation, the children you work with, and the environmental challenges in your community." },
+          { num: 2, title: 'We have a conversation', desc: "Our team responds as soon as possible. We'll explore together how our materials can be adapted for your country and community, and agree on a plan." },
+          { num: 3, title: 'Launch together', desc: 'We handle the localisation and adaptation of materials. You handle distribution to schools and children. Together, we create impact.' },
+        ].map(({ num, title, desc }) => (
+          <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 16px; padding: 2rem; text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--color-primary); color: #fff; font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">
               {num}
             </div>
-            <h3 style="font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.625rem;">
-              {title}
-            </h3>
-            <p style="font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">
-              {desc}
-            </p>
+            <h3 style="font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.625rem;">{title}</h3>
+            <p style="font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">{desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- What you get -->
+  <!-- What partnership looks like -->
   <section style="padding: 5rem 1.5rem; background: var(--color-bg); border-top: 1px solid var(--color-border);">
     <div style="max-width: 900px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
@@ -228,16 +231,14 @@ import PageLayout from '../layouts/PageLayout.astro';
           <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.875rem;">
             {[
               'Localised activity guides and student workbooks',
-              'Culturally adapted illustrations by our illustrator Petra',
-              'Co-branding with your organisation\'s logo on all materials',
+              'Culturally adapted illustrations for each country edition',
+              "Co-branding with your organisation's logo on all materials",
               'Customised action plan and project timeline',
               'Expert advice and ongoing support',
               'Promotional materials to announce the programme',
             ].map((item) => (
               <li style="display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.5;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" style="flex-shrink: 0; margin-top: 2px;" aria-hidden="true">
-                  <polyline points="20,6 9,17 4,12"/>
-                </svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" style="flex-shrink: 0; margin-top: 2px;" aria-hidden="true"><polyline points="20,6 9,17 4,12"/></svg>
                 {item}
               </li>
             ))}
@@ -258,9 +259,7 @@ import PageLayout from '../layouts/PageLayout.astro';
               'A shared commitment to a lasting, sustainable partnership',
             ].map((item) => (
               <li style="display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.5;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2.5" stroke-linecap="round" style="flex-shrink: 0; margin-top: 2px;" aria-hidden="true">
-                  <polyline points="20,6 9,17 4,12"/>
-                </svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2.5" stroke-linecap="round" style="flex-shrink: 0; margin-top: 2px;" aria-hidden="true"><polyline points="20,6 9,17 4,12"/></svg>
                 {item}
               </li>
             ))}
@@ -270,18 +269,13 @@ import PageLayout from '../layouts/PageLayout.astro';
     </div>
   </section>
 
-  <!-- Social proof -->
-  <section style="padding: 4rem 1.5rem; background: rgba(45, 106, 79, 0.05); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
-    <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-      <p style="font-size: 1.125rem; font-weight: 600; color: var(--color-text); margin: 0 0 1.5rem;">
-        Join our global network of 42 partners in 26 countries
+  <!-- "Want to go far" illustration placeholder -->
+  <section style="padding: 4rem 1.5rem; background: rgba(82, 183, 136, 0.06); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); text-align: center;">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <p style="font-family: var(--font-display); font-size: 1.375rem; font-weight: 600; color: var(--color-primary); margin: 0 0 0.5rem; font-style: italic;">
+        "If you want to go fast, go alone. If you want to go far, go together."
       </p>
-      <p style="font-size: 0.9375rem; color: var(--color-text-muted); margin: 0; line-height: 1.65;">
-        Including partners in <strong>Cameroon, Congo, Egypt, Ethiopia, Indonesia, Ecuador, Senegal, Sierra Leone, Thailand, Netherlands,</strong> and <strong>Australia.</strong>
-      </p>
-      <a href="/our-projects" style="display: inline-block; margin-top: 1.25rem; font-size: 0.9375rem; font-weight: 600; color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px;">
-        See all our partners →
-      </a>
+      <p style="font-size: 0.9375rem; color: var(--color-text-muted); margin: 0;">African proverb</p>
     </div>
   </section>
 
@@ -290,19 +284,14 @@ import PageLayout from '../layouts/PageLayout.astro';
     <div style="max-width: 720px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--color-text); margin: 0 0 0.75rem;">
-          Start a Conversation
+          Start the Conversation
         </h2>
-        <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">
-          Complete this short form and we'll be in touch as soon as possible. There's no commitment required — just a conversation.
+        <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0; max-width: 580px; margin-left: auto; margin-right: auto;">
+          Join 42 partners worldwide by starting to bring a successful environmental programme to your community! Fill in the form and collaborate towards a Happy Green World!
         </p>
       </div>
 
-      <div style="
-        background: var(--color-surface);
-        border: 1px solid var(--color-border);
-        border-radius: 20px;
-        padding: 3rem;
-      ">
+      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 20px; padding: 3rem;">
         <form
           name="partner-inquiry"
           method="POST"
@@ -315,108 +304,26 @@ import PageLayout from '../layouts/PageLayout.astro';
             <label>Don't fill this out if you're human: <input name="bot-field" /></label>
           </p>
 
-          <!-- Row 1: Name + Email -->
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;" class="form-row">
             <div>
-              <label for="full-name" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">
-                Full Name <span style="color: #c0392b;" aria-label="required">*</span>
-              </label>
-              <input
-                type="text"
-                id="full-name"
-                name="full-name"
-                required
-                autocomplete="name"
-                style="
-                  width: 100%;
-                  padding: 0.75rem 1rem;
-                  border: 1.5px solid var(--color-border);
-                  border-radius: 10px;
-                  font-family: var(--font-body);
-                  font-size: 1rem;
-                  color: var(--color-text);
-                  background: var(--color-bg);
-                  box-sizing: border-box;
-                  transition: border-color 0.15s;
-                "
-              />
+              <label for="full-name" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">Full Name <span style="color: #c0392b;" aria-label="required">*</span></label>
+              <input type="text" id="full-name" name="full-name" required autocomplete="name" style="width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--color-border); border-radius: 10px; font-family: var(--font-body); font-size: 1rem; color: var(--color-text); background: var(--color-bg); box-sizing: border-box;" />
             </div>
             <div>
-              <label for="email" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">
-                Email Address <span style="color: #c0392b;" aria-label="required">*</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                autocomplete="email"
-                style="
-                  width: 100%;
-                  padding: 0.75rem 1rem;
-                  border: 1.5px solid var(--color-border);
-                  border-radius: 10px;
-                  font-family: var(--font-body);
-                  font-size: 1rem;
-                  color: var(--color-text);
-                  background: var(--color-bg);
-                  box-sizing: border-box;
-                  transition: border-color 0.15s;
-                "
-              />
+              <label for="email" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">Email Address <span style="color: #c0392b;" aria-label="required">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" style="width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--color-border); border-radius: 10px; font-family: var(--font-body); font-size: 1rem; color: var(--color-text); background: var(--color-bg); box-sizing: border-box;" />
             </div>
           </div>
 
-          <!-- Organisation name -->
           <div>
-            <label for="org-name" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">
-              Organisation Name <span style="color: #c0392b;" aria-label="required">*</span>
-            </label>
-            <input
-              type="text"
-              id="org-name"
-              name="organisation-name"
-              required
-              autocomplete="organization"
-              style="
-                width: 100%;
-                padding: 0.75rem 1rem;
-                border: 1.5px solid var(--color-border);
-                border-radius: 10px;
-                font-family: var(--font-body);
-                font-size: 1rem;
-                color: var(--color-text);
-                background: var(--color-bg);
-                box-sizing: border-box;
-                transition: border-color 0.15s;
-              "
-            />
+            <label for="org-name" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">Organisation Name <span style="color: #c0392b;" aria-label="required">*</span></label>
+            <input type="text" id="org-name" name="organisation-name" required autocomplete="organization" style="width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--color-border); border-radius: 10px; font-family: var(--font-body); font-size: 1rem; color: var(--color-text); background: var(--color-bg); box-sizing: border-box;" />
           </div>
 
-          <!-- Row 2: Organisation type + Country -->
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;" class="form-row">
             <div>
-              <label for="org-type" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">
-                Organisation Type <span style="color: #c0392b;" aria-label="required">*</span>
-              </label>
-              <select
-                id="org-type"
-                name="organisation-type"
-                required
-                style="
-                  width: 100%;
-                  padding: 0.75rem 1rem;
-                  border: 1.5px solid var(--color-border);
-                  border-radius: 10px;
-                  font-family: var(--font-body);
-                  font-size: 1rem;
-                  color: var(--color-text);
-                  background: var(--color-bg);
-                  box-sizing: border-box;
-                  appearance: none;
-                  cursor: pointer;
-                "
-              >
+              <label for="org-type" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">Organisation Type <span style="color: #c0392b;" aria-label="required">*</span></label>
+              <select id="org-type" name="organisation-type" required style="width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--color-border); border-radius: 10px; font-family: var(--font-body); font-size: 1rem; color: var(--color-text); background: var(--color-bg); box-sizing: border-box; appearance: none; cursor: pointer;">
                 <option value="" disabled selected>Select type…</option>
                 <option>School or School Network</option>
                 <option>NGO or Foundation</option>
@@ -428,54 +335,14 @@ import PageLayout from '../layouts/PageLayout.astro';
               </select>
             </div>
             <div>
-              <label for="country" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">
-                Country <span style="color: #c0392b;" aria-label="required">*</span>
-              </label>
-              <input
-                type="text"
-                id="country"
-                name="country"
-                required
-                autocomplete="country-name"
-                placeholder="e.g. Kenya"
-                style="
-                  width: 100%;
-                  padding: 0.75rem 1rem;
-                  border: 1.5px solid var(--color-border);
-                  border-radius: 10px;
-                  font-family: var(--font-body);
-                  font-size: 1rem;
-                  color: var(--color-text);
-                  background: var(--color-bg);
-                  box-sizing: border-box;
-                  transition: border-color 0.15s;
-                "
-              />
+              <label for="country" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">Country <span style="color: #c0392b;" aria-label="required">*</span></label>
+              <input type="text" id="country" name="country" required autocomplete="country-name" placeholder="e.g. Kenya" style="width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--color-border); border-radius: 10px; font-family: var(--font-body); font-size: 1rem; color: var(--color-text); background: var(--color-bg); box-sizing: border-box;" />
             </div>
           </div>
 
-          <!-- Estimated reach -->
           <div>
-            <label for="reach" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">
-              How many children could you reach?
-            </label>
-            <select
-              id="reach"
-              name="estimated-reach"
-              style="
-                width: 100%;
-                padding: 0.75rem 1rem;
-                border: 1.5px solid var(--color-border);
-                border-radius: 10px;
-                font-family: var(--font-body);
-                font-size: 1rem;
-                color: var(--color-text);
-                background: var(--color-bg);
-                box-sizing: border-box;
-                appearance: none;
-                cursor: pointer;
-              "
-            >
+            <label for="reach" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">How many children could you reach?</label>
+            <select id="reach" name="estimated-reach" style="width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--color-border); border-radius: 10px; font-family: var(--font-body); font-size: 1rem; color: var(--color-text); background: var(--color-bg); box-sizing: border-box; appearance: none; cursor: pointer;">
               <option value="" selected>Not sure yet</option>
               <option>Under 100</option>
               <option>100–500</option>
@@ -485,11 +352,8 @@ import PageLayout from '../layouts/PageLayout.astro';
             </select>
           </div>
 
-          <!-- Topics of interest -->
           <fieldset style="border: 1.5px solid var(--color-border); border-radius: 10px; padding: 1.25rem 1.5rem; margin: 0;">
-            <legend style="font-size: 0.875rem; font-weight: 600; color: var(--color-text); padding: 0 0.5rem;">
-              Which topic areas interest you?
-            </legend>
+            <legend style="font-size: 0.875rem; font-weight: 600; color: var(--color-text); padding: 0 0.5rem;">Which topic areas interest you?</legend>
             <div style="display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 0.75rem;">
               {[
                 { value: 'waste', label: 'Waste & Recycling' },
@@ -498,68 +362,21 @@ import PageLayout from '../layouts/PageLayout.astro';
                 { value: 'all', label: 'All three / Full curriculum' },
               ].map(({ value, label }) => (
                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.9375rem; color: var(--color-text);">
-                  <input
-                    type="checkbox"
-                    name="topics"
-                    value={value}
-                    style="width: 16px; height: 16px; accent-color: var(--color-primary);"
-                  />
+                  <input type="checkbox" name="topics" value={value} style="width: 16px; height: 16px; accent-color: var(--color-primary);" />
                   {label}
                 </label>
               ))}
             </div>
           </fieldset>
 
-          <!-- Context textarea -->
           <div>
-            <label for="context" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">
-              Tell us about your context <span style="color: #c0392b;" aria-label="required">*</span>
-            </label>
-            <textarea
-              id="context"
-              name="context"
-              required
-              rows="5"
-              placeholder="Tell us about your organisation, the community you serve, and why environmental education matters to you right now…"
-              style="
-                width: 100%;
-                padding: 0.875rem 1rem;
-                border: 1.5px solid var(--color-border);
-                border-radius: 10px;
-                font-family: var(--font-body);
-                font-size: 1rem;
-                color: var(--color-text);
-                background: var(--color-bg);
-                box-sizing: border-box;
-                resize: vertical;
-                min-height: 120px;
-                transition: border-color 0.15s;
-              "
-            ></textarea>
+            <label for="context" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">Tell us about your context <span style="color: #c0392b;" aria-label="required">*</span></label>
+            <textarea id="context" name="context" required rows="5" placeholder="Tell us about your organisation, the community you serve, and why environmental education matters to you right now…" style="width: 100%; padding: 0.875rem 1rem; border: 1.5px solid var(--color-border); border-radius: 10px; font-family: var(--font-body); font-size: 1rem; color: var(--color-text); background: var(--color-bg); box-sizing: border-box; resize: vertical; min-height: 120px;"></textarea>
           </div>
 
-          <!-- How did you hear -->
           <div>
-            <label for="referral" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">
-              How did you hear about us?
-            </label>
-            <select
-              id="referral"
-              name="referral-source"
-              style="
-                width: 100%;
-                padding: 0.75rem 1rem;
-                border: 1.5px solid var(--color-border);
-                border-radius: 10px;
-                font-family: var(--font-body);
-                font-size: 1rem;
-                color: var(--color-text);
-                background: var(--color-bg);
-                box-sizing: border-box;
-                appearance: none;
-                cursor: pointer;
-              "
-            >
+            <label for="referral" style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.5rem;">How did you hear about us?</label>
+            <select id="referral" name="referral-source" style="width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--color-border); border-radius: 10px; font-family: var(--font-body); font-size: 1rem; color: var(--color-text); background: var(--color-bg); box-sizing: border-box; appearance: none; cursor: pointer;">
               <option value="">Prefer not to say</option>
               <option>Google search</option>
               <option>Social media (Facebook / Instagram)</option>
@@ -570,40 +387,103 @@ import PageLayout from '../layouts/PageLayout.astro';
             </select>
           </div>
 
-          <!-- Privacy note -->
           <p style="font-size: 0.8125rem; color: var(--color-text-muted); line-height: 1.6; margin: 0; padding: 1rem; background: rgba(45, 106, 79, 0.05); border-radius: 8px;">
             We store your information securely and use it only to respond to your enquiry. You will not be added to any mailing list without your explicit consent. This site complies with GDPR.
           </p>
 
-          <!-- Submit -->
-          <button
-            type="submit"
-            style="
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              gap: 0.5rem;
-              padding: 1rem 2rem;
-              background: var(--color-primary);
-              color: #fff;
-              font-family: var(--font-body);
-              font-size: 1.0625rem;
-              font-weight: 700;
-              border: none;
-              border-radius: 12px;
-              cursor: pointer;
-              transition: background 0.15s;
-              width: 100%;
-            "
-          >
+          <button type="submit" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 2rem; background: var(--color-primary); color: #fff; font-family: var(--font-body); font-size: 1.0625rem; font-weight: 700; border: none; border-radius: 12px; cursor: pointer; transition: background 0.15s; width: 100%;">
             Send My Enquiry
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
-              <line x1="22" y1="2" x2="11" y2="13"/>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </button>
         </form>
       </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section style="background: var(--color-primary); padding: 3rem 1.5rem;">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center;" class="partners-stats-grid">
+        {[
+          { value: '26', label: 'Countries' },
+          { value: '42', label: 'Partners' },
+          { value: '4', label: 'Continents' },
+          { value: '10', label: 'Languages' },
+        ].map(({ value, label }) => (
+          <li>
+            <div style="font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: var(--color-accent-light); line-height: 1; margin-bottom: 0.3rem;">{value}</div>
+            <div style="font-size: 0.9375rem; color: rgba(255,255,255,0.75); font-weight: 500;">{label}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Countries by region -->
+  <section style="padding: 5rem 1.5rem; background: var(--color-bg);">
+    <div style="max-width: 960px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3.5rem;">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--color-text); margin: 0 0 0.75rem;">
+          Countries we've worked in
+        </h2>
+        <p style="font-size: 1.0625rem; color: var(--color-text-muted); max-width: 560px; margin: 0 auto; line-height: 1.65;">
+          We work through local partner organisations — NGOs, schools, and community groups — who know their communities best.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem 5rem;" class="regions-grid">
+        {regions.map((region, ri) => (
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 1.125rem; color: var(--color-text); margin: 0 0 1rem; padding-bottom: 0.625rem; border-bottom: 2px solid var(--color-border); display: flex; align-items: center; gap: 0.5rem;">
+              <span style="width: 11px; height: 11px; border-radius: 50%; background: var(--color-primary); flex-shrink: 0; display: inline-block; box-shadow: 0 0 0 3px rgba(45,106,79,0.18);"></span>
+              {region.name}
+            </h3>
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem;">
+              {region.countries.map((country) => (
+                <li style="font-size: 0.9375rem; color: var(--color-text); line-height: 1.45;">{country}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Named partners -->
+  <section style="padding: 5rem 1.5rem; background: var(--color-surface); border-top: 1px solid var(--color-border);">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--color-text); margin: 0 0 0.875rem;">
+          Our partners & distributors
+        </h2>
+        <p style="font-size: 1rem; color: var(--color-text-muted); max-width: 600px; margin: 0 auto; line-height: 1.65;">
+          HGW partners share more than a mission — we encourage them to connect with each other, because together we can achieve far more. All our partners work towards the same goal: a cleaner, greener world for children.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;" class="partners-list-grid">
+        {namedPartners.map(({ name, country, url }) => (
+          <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+            <div>
+              {url ? (
+                <a href={url} target="_blank" rel="noopener noreferrer" style="font-size: 0.9375rem; font-weight: 600; color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px;">
+                  {name}
+                </a>
+              ) : (
+                <span style="font-size: 0.9375rem; font-weight: 600; color: var(--color-text);">{name}</span>
+              )}
+              <div style="font-size: 0.8125rem; color: var(--color-text-muted); margin-top: 0.2rem;">{country}</div>
+            </div>
+            {url && (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <p style="text-align: center; font-size: 0.9375rem; color: var(--color-text-muted); margin-top: 2rem; line-height: 1.65;">
+        Partner website links are added as they become available. If you are a partner and would like your website listed, please <a href="/contact" style="color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px;">get in touch</a>.
+      </p>
     </div>
   </section>
 </PageLayout>
@@ -615,13 +495,19 @@ import PageLayout from '../layouts/PageLayout.astro';
     box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
   }
   button[type="submit"]:hover {
-    background: var(--color-primary-dark) !important;
+    background: #1e4d38 !important;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
+    .why-grid { grid-template-columns: 1fr !important; }
     .who-grid { grid-template-columns: 1fr !important; }
     .steps-grid { grid-template-columns: 1fr !important; }
     .partnership-grid { grid-template-columns: 1fr !important; }
+    .partners-list-grid { grid-template-columns: 1fr !important; }
+    .regions-grid { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 600px) {
+    .partners-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .form-row { grid-template-columns: 1fr !important; }
   }
 </style>

@@ -1,35 +1,98 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import { getCollection } from 'astro:content';
 
-const programmes = (await getCollection('programmes')).sort((a, b) => a.data.order - b.data.order);
-
-const colorMap: Record<string, { text: string; bg: string }> = {
-  '#52B788': { text: '#2D6A4F', bg: 'rgba(82, 183, 136, 0.12)' },
-  '#74C0FC': { text: '#1864ab', bg: 'rgba(116, 192, 252, 0.15)' },
-  '#FFD166': { text: '#8a6200', bg: 'rgba(255, 209, 102, 0.2)' },
-};
-
-const programmeCovers: Record<string, { img: string; label: string; docId: string }[]> = {
-  waste: [
-    { img: 'https://image.isu.pub/241107155913-594b6739615cc3a01953ad97b7ad48dc/jpg/page_1_thumb_large.jpg', label: 'Tanzania Student Book', docId: 'issuuhgtsb' },
-    { img: 'https://image.isu.pub/241107154947-bf1e5f463bf1098e1ff2a7f9b092b2fe/jpg/page_1_thumb_large.jpg', label: 'Tanzania Activity Guide', docId: '031024aghappygreentanzaniaengels' },
-    { img: 'https://image.isu.pub/241107161605-c4c8aa09c23c215f5d0fa6056cf4fe08/jpg/page_1_thumb_large.jpg', label: 'Tanzania Board Game', docId: '031024happygreentanzaniabg' },
-    { img: 'https://image.isu.pub/240326195802-b2a12b44ef362b23b1684ca814e2445d/jpg/page_1_thumb_large.jpg', label: 'Philippines Waste Game', docId: '200224boardgamehgp' },
-  ],
-  water: [
-    { img: 'https://image.isu.pub/241107155913-594b6739615cc3a01953ad97b7ad48dc/jpg/page_1_thumb_large.jpg', label: 'Tanzania Student Book', docId: 'issuuhgtsb' },
-    { img: 'https://image.isu.pub/241107154947-bf1e5f463bf1098e1ff2a7f9b092b2fe/jpg/page_1_thumb_large.jpg', label: 'Tanzania Activity Guide', docId: '031024aghappygreentanzaniaengels' },
-    { img: 'https://image.isu.pub/200619055200-cf0bd72947dcc96efe96ef8f4b72a7df/jpg/page_1_thumb_large.jpg', label: 'HGW Water Game', docId: '19.6.2020_hgw_water_game.issuu' },
-    { img: 'https://image.isu.pub/241113152958-7312cdd7f4c51bc3673e825cec5ad743/jpg/page_1_thumb_large.jpg', label: 'Vietnam Student Book', docId: '030924sbvietnam' },
-  ],
-  energy: [
-    { img: 'https://image.isu.pub/240326202259-c30fc83bec9800a45efb8f4ddfd41a74/jpg/page_1_thumb_large.jpg', label: 'Philippines Student Book', docId: '200224sbhgp' },
-    { img: 'https://image.isu.pub/240326200958-cfe841a37b46d76d96bde4cae985be1a/jpg/page_1_thumb_large.jpg', label: 'Philippines Activity Guide', docId: '200224hgpag' },
-    { img: 'https://image.isu.pub/241113111824-69ec82d9dce708d9346d2fac78b973bd/jpg/page_1_thumb_large.jpg', label: 'Vietnam Activity Guide', docId: 'agvietnam30082024' },
-    { img: 'https://image.isu.pub/230213155024-a3104178e983ddea46e0da56fa04ab2b/jpg/page_1_thumb_large.jpg', label: 'Afrique Student Book', docId: '100821afriquepropreetvert' },
-  ],
-};
+const programmes = [
+  {
+    slug: 'waste',
+    title: 'Waste & Recycling',
+    tagline: 'Teaching children to reduce, reuse, and recycle',
+    description: 'Our environmental programmes teach sustainable behaviour towards waste, water and energy. All resources are customised and localised for children to relate better and act on the lessons learned.',
+    ageRange: 'Ages 6–16',
+    color: '#52B788',
+    textColor: '#2D6A4F',
+    bgColor: 'rgba(82, 183, 136, 0.12)',
+    languages: ['English', 'French', 'Bahasa Indonesia', 'Spanish', 'Vietnamese', 'Khmer', 'Swahili', 'Arabic', 'Dutch', 'Thai'],
+    materials: [
+      {
+        title: 'Activity Guide for Teachers',
+        description: 'Contains 35 interactive activities discussing the concept of reduce, reuse, and recycle waste through awareness, thinking, and doing activities.',
+        img: 'https://image.isu.pub/241107154947-bf1e5f463bf1098e1ff2a7f9b092b2fe/jpg/page_1_thumb_large.jpg',
+        docId: '031024aghappygreentanzaniaengels',
+      },
+      {
+        title: 'Student Book',
+        description: 'Explains the origin of materials such as plastic, green waste, glass, and paper. Discusses the problems and effects on nature, decomposition times, and active solutions. Full-colour illustrations show a city gradually changing from polluted to green and healthy.',
+        img: 'https://image.isu.pub/241107155913-594b6739615cc3a01953ad97b7ad48dc/jpg/page_1_thumb_large.jpg',
+        docId: 'issuuhgtsb',
+      },
+      {
+        title: 'Recycling Game',
+        description: 'Based on snakes and ladders, where good or bad behaviour towards waste is rewarded or penalised. Children learn by playing and revisit the environmental lessons and actions multiple times.',
+        img: 'https://image.isu.pub/241107161605-c4c8aa09c23c215f5d0fa6056cf4fe08/jpg/page_1_thumb_large.jpg',
+        docId: '031024happygreentanzaniabg',
+      },
+    ],
+  },
+  {
+    slug: 'water',
+    title: 'Water & Conservation',
+    tagline: 'Teaching children why water is precious and how to protect it',
+    description: 'Children learn why water is precious, how drinking water is treated and how to conserve and protect it. All materials are adapted for the local context.',
+    ageRange: 'Ages 6–16',
+    color: '#74C0FC',
+    textColor: '#1864ab',
+    bgColor: 'rgba(116, 192, 252, 0.15)',
+    languages: ['English', 'Dutch'],
+    materials: [
+      {
+        title: 'Activity Guide for Teachers',
+        description: 'Interactive activities that guide children through the water cycle, water sources, and practical actions to conserve water in their daily lives.',
+        img: 'https://image.isu.pub/241107154947-bf1e5f463bf1098e1ff2a7f9b092b2fe/jpg/page_1_thumb_large.jpg',
+        docId: '031024aghappygreentanzaniaengels',
+      },
+      {
+        title: 'Student Book',
+        description: 'A full-colour book explaining where drinking water comes from, how it is treated, and what children can do to protect water resources in their community.',
+        img: 'https://image.isu.pub/241113152958-7312cdd7f4c51bc3673e825cec5ad743/jpg/page_1_thumb_large.jpg',
+        docId: '030924sbvietnam',
+      },
+      {
+        title: 'Water Game',
+        description: 'A playful board game where children practise water-saving decisions, reinforcing the lessons from the activity guide and student book through play.',
+        img: 'https://image.isu.pub/200619055200-cf0bd72947dcc96efe96ef8f4b72a7df/jpg/page_1_thumb_large.jpg',
+        docId: '19.6.2020_hgw_water_game.issuu',
+      },
+    ],
+  },
+  {
+    slug: 'energy',
+    title: 'Energy & Climate',
+    tagline: 'Teaching children about fossil fuels, renewables, and sustainable choices',
+    description: 'Children learn about fossil fuels and renewables and how and why to make sustainable choices with regards to energy. Illustrations and country editions are currently being developed.',
+    ageRange: 'Ages 6–16',
+    color: '#FFD166',
+    textColor: '#8a6200',
+    bgColor: 'rgba(255, 209, 102, 0.2)',
+    languages: ['English'],
+    materials: [
+      {
+        title: 'Activity Guide for Teachers',
+        description: 'Interactive activities covering energy sources, the impact of fossil fuels, and practical steps children and families can take to reduce energy use.',
+        img: null,
+      },
+      {
+        title: 'Student Book',
+        description: 'A full-colour guide to energy — how it is produced, what fossil fuels are, and why renewables matter for our planet\'s future.',
+        img: null,
+      },
+      {
+        title: 'Energy Game',
+        description: 'A board game where children make energy choices, learning through play which decisions help or harm the environment.',
+        img: null,
+      },
+    ],
+  },
+];
 ---
 
 <PageLayout
@@ -45,137 +108,115 @@ const programmeCovers: Record<string, { img: string; label: string; docId: strin
         <span style="font-size: 0.875rem; color: rgba(255,255,255,0.9);">Programmes</span>
       </nav>
       <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff; margin: 0 0 1rem;">
-        Our Programmes
+        Our Environmental Programmes
       </h1>
-      <p style="font-size: 1.125rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0; max-width: 600px; margin-left: auto; margin-right: auto;">
-        Three core curriculum areas, each designed to be meaningful in the local context where it is taught — with illustrations, activities, and examples drawn from children's own environments.
+      <p style="font-size: 1.125rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0; max-width: 640px; margin-left: auto; margin-right: auto;">
+        Our environmental programmes teach sustainable behaviour towards waste, water and energy. All resources are customised and localised for children to relate better and act on the lessons learned.
       </p>
     </div>
   </section>
 
-  <!-- Programmes grid -->
+  <!-- Programmes -->
   <section style="padding: 5rem 1.5rem; background: var(--color-bg);">
-    <div style="max-width: 1000px; margin: 0 auto;">
-      <div style="display: grid; gap: 2rem;">
-        {programmes.map((programme) => {
-          const colors = colorMap[programme.data.color] || { text: 'var(--color-primary)', bg: 'rgba(45, 106, 79, 0.1)' };
-          const covers = programmeCovers[programme.data.slug] || [];
-          return (
-            <article style="
-              background: var(--color-surface);
-              border: 1px solid var(--color-border);
-              border-radius: 16px;
-              padding: 2.5rem;
-            " class="programme-row">
-              <!-- Top row: icon + title + button -->
-              <div style="display: grid; grid-template-columns: auto 1fr auto; gap: 2rem; align-items: center; margin-bottom: 1.5rem;" class="programme-top">
-                <div style={`
-                  width: 72px;
-                  height: 72px;
-                  border-radius: 16px;
-                  background: ${colors.bg};
-                  color: ${programme.data.color};
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  flex-shrink: 0;
-                `} set:html={
-                  programme.data.slug === 'waste'
-                    ? `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 5,6 21,6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>`
-                    : programme.data.slug === 'water'
-                    ? `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6 9 4 13 4 16a8 8 0 0 0 16 0c0-3-2-7-8-14z"/></svg>`
-                    : `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`
-                } />
-
-                <div>
-                  <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.625rem;">
-                    <h2 style="font-family: var(--font-display); font-size: 1.375rem; font-weight: 600; color: var(--color-text); margin: 0;">
-                      {programme.data.title}
-                    </h2>
-                    <span style={`
-                      display: inline-block;
-                      padding: 0.25rem 0.625rem;
-                      background: ${colors.bg};
-                      color: ${colors.text};
-                      font-size: 0.8125rem;
-                      font-weight: 600;
-                      border-radius: 99px;
-                    `}>
-                      {programme.data.ageRange}
-                    </span>
-                  </div>
-                  <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0;">
-                    {programme.data.tagline}
-                  </p>
-                </div>
-
-                <a
-                  href={`/programmes/${programme.data.slug}`}
-                  style="
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.375rem;
-                    padding: 0.75rem 1.375rem;
-                    background: var(--color-primary);
-                    color: #fff;
-                    font-size: 0.9375rem;
-                    font-weight: 600;
-                    text-decoration: none;
-                    border-radius: 10px;
-                    white-space: nowrap;
-                    flex-shrink: 0;
-                  "
-                >
-                  Learn more
-                </a>
+    <div style="max-width: 1100px; margin: 0 auto; display: grid; gap: 4rem;">
+      {programmes.map((prog) => (
+        <article style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 20px; overflow: hidden;">
+          <!-- Programme header -->
+          <div style={`background: ${prog.bgColor}; border-bottom: 1px solid var(--color-border); padding: 2rem 2.5rem; display: flex; align-items: flex-start; gap: 1.5rem;`} class="prog-header">
+            <div style={`width: 64px; height: 64px; border-radius: 14px; background: rgba(255,255,255,0.7); color: ${prog.color}; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1.5px solid rgba(255,255,255,0.8);`} set:html={
+              prog.slug === 'waste'
+                ? `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 5,6 21,6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>`
+                : prog.slug === 'water'
+                ? `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6 9 4 13 4 16a8 8 0 0 0 16 0c0-3-2-7-8-14z"/></svg>`
+                : `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`
+            } />
+            <div style="flex: 1;">
+              <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+                <h2 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--color-text); margin: 0;">
+                  {prog.title}
+                </h2>
+                <span style={`display: inline-block; padding: 0.25rem 0.75rem; background: rgba(255,255,255,0.65); color: ${prog.textColor}; font-size: 0.8125rem; font-weight: 600; border-radius: 99px; border: 1px solid rgba(255,255,255,0.5);`}>
+                  {prog.ageRange}
+                </span>
               </div>
+              <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0; max-width: 640px;">
+                {prog.description}
+              </p>
+            </div>
+          </div>
 
-              <!-- Material cover strip -->
-              {covers.length > 0 && (
-                <div style={`border-top: 1px solid var(--color-border); padding-top: 1.25rem;`}>
-                  <p style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin: 0 0 0.75rem;">
-                    {programme.data.slug === 'energy' ? 'Coming Soon' : 'Programme Materials'}
-                  </p>
-                  {programme.data.slug === 'energy' ? (
-                    <div style="position: relative; display: inline-flex; gap: 0.625rem;">
-                      {covers.map(({ img, label }) => (
-                        <div style="border-radius: 6px; overflow: hidden; border: 1px solid var(--color-border); flex-shrink: 0;">
-                          <img src={img} alt={label} loading="lazy" style="height: 72px; width: auto; display: block; filter: blur(3px) brightness(0.55);" />
-                        </div>
-                      ))}
-                      <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;">
-                        <span class="pi-cs-badge" style="font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #FFD166; line-height: 1;">Coming Soon</span>
-                        <span class="pi-cs-dots" style="font-size: 0.875rem; color: rgba(255,209,102,0.7);">•••</span>
-                      </div>
-                    </div>
-                  ) : (
-                    <div style="display: flex; gap: 0.625rem; flex-wrap: wrap;">
-                      {covers.map(({ img, label, docId }) => (
-                        <a
-                          href={`https://issuu.com/happygreenworld/docs/${docId}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          title={label}
-                          style="display: block; border-radius: 6px; overflow: hidden; border: 1px solid var(--color-border); flex-shrink: 0; transition: transform 0.2s, box-shadow 0.2s;"
-                          onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.12)'"
-                          onmouseout="this.style.transform=''; this.style.boxShadow=''"
-                        >
-                          <img
-                            src={img}
-                            alt={label}
-                            loading="lazy"
-                            style="height: 72px; width: auto; display: block;"
-                          />
-                        </a>
-                      ))}
-                    </div>
-                  )}
+          <!-- Materials grid -->
+          <div style="padding: 2.5rem;" class="prog-body">
+            {prog.slug === 'energy' ? (
+              <div style={`border-radius: 14px; padding: 3rem 2rem; background: ${prog.bgColor}; border: 2px dashed rgba(216,160,32,0.35); text-align: center;`}>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={prog.textColor} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin: 0 auto 1rem; display: block; opacity: 0.6;">
+                  <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <p style={`font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; color: ${prog.textColor}; margin: 0 0 0.5rem;`}>
+                  Programme coming soon
+                </p>
+                <p style="font-size: 0.9375rem; color: var(--color-text-muted); margin: 0; line-height: 1.6; max-width: 480px; margin-left: auto; margin-right: auto;">
+                  The Energy & Climate programme — including the activity guide, student book, and game — is currently in development. Get in touch if you'd like to be the first to know when it launches.
+                </p>
+              </div>
+            ) : (
+              <>
+            <h3 style="font-family: var(--font-display); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-text-muted); margin: 0 0 1.5rem;">
+              Programme Materials
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" class="materials-grid">
+              {prog.materials.map((mat) => (
+                <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 14px; overflow: hidden;">
+                  {mat.img ? (
+                    mat.docId ? (
+                      <a
+                        href={`https://issuu.com/happygreenworld/docs/${mat.docId}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style="display: block;"
+                      >
+                        <img
+                          src={mat.img}
+                          alt={mat.title}
+                          loading="lazy"
+                          style="width: 100%; height: 200px; object-fit: cover; display: block;"
+                        />
+                      </a>
+                    ) : (
+                      <img
+                        src={mat.img}
+                        alt={mat.title}
+                        loading="lazy"
+                        style="width: 100%; height: 200px; object-fit: cover; display: block;"
+                      />
+                    )
+                  ) : null}
+                  <div style="padding: 1.125rem 1rem 1.25rem;">
+                    <h4 style="font-family: var(--font-display); font-size: 0.9375rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.5rem;">
+                      {mat.title}
+                    </h4>
+                    <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6; margin: 0;">
+                      {mat.description}
+                    </p>
+                  </div>
                 </div>
-              )}
-            </article>
-          );
-        })}
-      </div>
+              ))}
+            </div>
+
+            <!-- Languages -->
+            <div style="margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap;">
+              <span style="font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); flex-shrink: 0;">
+                Available in {prog.languages.length} {prog.languages.length === 1 ? 'language' : 'languages'}:
+              </span>
+              <span style="font-size: 0.9375rem; color: var(--color-text);">
+                {prog.languages.join(' · ')}
+              </span>
+            </div>
+            </>
+            )}
+          </div>
+        </article>
+      ))}
     </div>
   </section>
 
@@ -183,49 +224,35 @@ const programmeCovers: Record<string, { img: string; label: string; docId: strin
   <section style="padding: 4rem 1.5rem; background: var(--color-surface); border-top: 1px solid var(--color-border); text-align: center;">
     <div style="max-width: 600px; margin: 0 auto;">
       <h2 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 1.875rem); color: var(--color-text); margin: 0 0 0.875rem;">
-        Want to deliver these programmes in your community?
+        Contact us to bring environmental education to your community!
       </h2>
-      <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0 0 2rem;">
-        We work with schools, NGOs, and organisations worldwide to localise and distribute our materials. Start a conversation with us.
+      <p style="font-size: 1rem; color: var(--color-text-muted); line-height: 1.65; margin: 0 0 1.5rem;">
+        We work with schools, NGOs, and organisations worldwide to localise and distribute our materials.
       </p>
-      <a
-        href="/partner-with-us"
-        style="
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.875rem 1.75rem;
-          background: var(--color-accent);
-          color: var(--color-text);
-          font-size: 1rem;
-          font-weight: 700;
-          text-decoration: none;
-          border-radius: 10px;
-        "
-      >
-        Partner With Us →
-      </a>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a
+          href="/partner-with-us"
+          style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.75rem; background: var(--color-accent); color: var(--color-text); font-size: 1rem; font-weight: 700; text-decoration: none; border-radius: 10px;"
+        >
+          Partner With Us →
+        </a>
+        <a
+          href="/resources"
+          style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.75rem; background: transparent; color: var(--color-primary); font-size: 1rem; font-weight: 600; text-decoration: none; border-radius: 10px; border: 2px solid var(--color-primary);"
+        >
+          Browse Educational Resources →
+        </a>
+      </div>
     </div>
   </section>
 </PageLayout>
 
 <style>
-  @media (max-width: 700px) {
-    .programme-top {
-      grid-template-columns: 1fr !important;
-      gap: 1.25rem !important;
-    }
+  @media (max-width: 900px) {
+    .prog-header { flex-direction: column !important; }
+    .materials-grid { grid-template-columns: 1fr !important; }
   }
-
-  @keyframes pi-cs-glow {
-    0%, 100% { opacity: 1; text-shadow: 0 0 6px rgba(255,209,102,0.7); }
-    50% { opacity: 0.6; text-shadow: 0 0 14px rgba(255,209,102,1); }
+  @media (max-width: 600px) {
+    .prog-body { padding: 1.5rem !important; }
   }
-  @keyframes pi-cs-bounce {
-    0%, 100% { letter-spacing: 0.1em; }
-    50% { letter-spacing: 0.3em; }
-  }
-  .pi-cs-badge { animation: pi-cs-glow 1.8s ease-in-out infinite; }
-  .pi-cs-dots { animation: pi-cs-bounce 1.4s ease-in-out infinite; }
 </style>
-

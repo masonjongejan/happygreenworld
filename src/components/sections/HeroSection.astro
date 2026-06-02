@@ -55,10 +55,19 @@
         font-size: 1.1875rem;
         color: var(--color-text-muted);
         line-height: 1.7;
+        margin: 0 0 0.75rem;
+        max-width: 480px;
+      ">
+        Children learn to adopt sustainable behaviour for our world, their future.
+      </p>
+      <p class="hero-body" style="
+        font-size: 1rem;
+        color: var(--color-text-muted);
+        line-height: 1.7;
         margin: 0 0 2rem;
         max-width: 480px;
       ">
-        Happy Green World Foundation creates localised environmental education for children aged 6–16 — teaching waste, water, and energy literacy through 42 partners in 26 countries across 4 continents.
+        Happy Green World designs and provides customised environmental education on topics waste, water and energy in collaboration with 42 partners in 26 countries across 4 continents.
       </p>
 
       <div class="hero-ctas" style="display: flex; gap: 0.875rem; flex-wrap: wrap;">
@@ -106,9 +115,8 @@
       </div>
     </div>
 
-    <!-- Right: floating image -->
+    <!-- Right: Indonesia video -->
     <div class="hero-image" style="position: relative;">
-      <!-- Floating decorative leaf shapes behind the image -->
       <div style="
         position: absolute;
         top: -24px; right: -24px;
@@ -128,27 +136,23 @@
         pointer-events: none;
       " aria-hidden="true"></div>
 
-      <!-- Main image with float -->
-      <div class="anim-float" style="
+      <div class="hero-image-wrapper" style="
         border-radius: 20px;
         overflow: hidden;
-        aspect-ratio: 1/1;
-        background: #fff;
+        aspect-ratio: 16/9;
+        background: #1e4d38;
         position: relative;
         z-index: 1;
-      " class="hero-image-wrapper">
-        <img
-          src="/images/booklet-children-worldwide.png"
-          alt="Children from around the world holding hands together — the Happy Green World vision"
-          style="
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-            transform: scale(1.08);
-          "
-          loading="eager"
-        />
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      ">
+        <iframe
+          src="https://www.youtube.com/embed/1rWNz1RBd9U"
+          title="Happy Green World — Indonesia programme"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="width: 100%; height: 100%; border: none; display: block;"
+          loading="lazy"
+        ></iframe>
       </div>
     </div>
   </div>

@@ -2,15 +2,15 @@
 const currentPath = Astro.url.pathname;
 
 const navLinks = [
+  { href: '/', label: 'Home' },
   { href: '/programmes', label: 'Programmes' },
-  { href: '/our-projects', label: 'Our Partners' },
-  { href: '/videos', label: 'Videos' },
-  { href: '/resources', label: 'Resources' },
   { href: '/partner-with-us', label: 'Partner With Us' },
+  { href: '/resources', label: 'Resources' },
+  { href: '/videos', label: 'Videos' },
 ];
 
 function isActive(href: string) {
-  if (href === '/') return currentPath === '/';
+  if (href === '/') return currentPath === '/' || currentPath === '';
   return currentPath.startsWith(href);
 }
 ---
